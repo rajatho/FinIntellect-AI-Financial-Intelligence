@@ -139,5 +139,59 @@
       "default_length": "Standard",
       "default_tone": "Professional"
     }
+  },
+  "3a9a2db2": {
+    "id": "3a9a2db2",
+    "name": "Alexander Sterling",
+    "email": "alex_1794735402@capital.com",
+    "password_hash": "scrypt:32768:8:1$MpxhabRVLEQSCs3E$5bc2c758a597995934de63fa2a91dac48305e1b4ebee7fc265b22ba92dc2c4bb8ddbad947c24f7a83c02e63496453352eda36322510bc86fd50fb3c5833d19e8",
+    "company": "Sterling Capital Partners",
+    "role": "Portfolio Manager",
+    "avatar_initials": "AS",
+    "avatar_color": "from-emerald-600 to-teal-600",
+    "created_at": "2026-11-15 15:06:42",
+    "reports": [
+      "techcorp_solutions_ltd._fy2025"
+    ],
+    "preferences": {
+      "default_length": "Standard",
+      "default_tone": "Professional"
+    }
+  },
+  "439077e8": {
+    "id": "439077e8",
+    "name": "Alexander Sterling",
+    "email": "alex_1794736830@capital.com",
+    "password_hash": "scrypt:32768:8:1$uqMxfZzksBhz7BkE$e54338874aba52589b5b0b4b2fbe92aa371833bd8fd322a2470183b79da56c5bca07fa9397628544a5b532220342c81e7b287123ca6dbcb0bc846672553014f3",
+    "company": "Sterling Capital Partners",
+    "role": "Portfolio Manager",
+    "avatar_initials": "AS",
+    "avatar_color": "from-amber-500 to-orange-600",
+    "created_at": "2026-11-15 15:30:30",
+    "reports": [
+      "techcorp_solutions_ltd._fy2025"
+    ],
+    "preferences": {
+      "default_length": "Standard",
+      "default_tone": "Professional"
+    }
+  },
+  "e68aef83": {
+    "id": "e68aef83",
+    "name": "Alexander Sterling",
+    "email": "alex_1794737186@capital.com",
+    "password_hash": "scrypt:32768:8:1$IuV6eWFbhITYQs6T$531ec9320f4e61d43abdbbc9605cf6b5d4cc5b5fb46ff7113ac0877b19953d29f912795f38acd65e64cc1fcf36b07384205d661ca4dc372cdc822ee6a9189638",
+    "company": "Sterling Capital Partners",
+    "role": "Portfolio Manager",
+    "avatar_initials": "AS",
+    "avatar_color": "from-cyan-600 to-blue-600",
+    "created_at": "2026-11-15 15:36:26",
+    "reports": [
+      "techcorp_solutions_ltd._fy2025"
+    ],
+    "preferences": {
+      "default_length": "Standard",
+      "default_tone": "Professional"
+    }
   }
 }

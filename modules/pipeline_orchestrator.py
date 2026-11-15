@@ -61,13 +61,14 @@ class PipelineOrchestrator:
         report_id: Optional[str] = None,
         length: str = "Standard",
         tone: str = "Professional",
-        custom_api_key: Optional[str] = None
+        custom_api_key: Optional[str] = None,
+        model: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Executes complete end-to-end pipeline:
         Document Extraction -> Financial Data Extraction -> Data Validation ->
         Ratio Calculation -> Trend Analysis -> Anomaly Detection -> ML Risk ->
-        NLP Analysis -> Verified Analysis Object -> Gemini 3.5 Flash-Lite / Fallback ->
+        NLP Analysis -> Verified Analysis Object -> Gemini Frontier Models / Fallback ->
         Accuracy Validation -> Store Version -> PDF Ready.
         """
         # 1. Extraction & Normalization
@@ -85,7 +86,7 @@ class PipelineOrchestrator:
         # 5. Anomaly Detection
         anomalies = self.anomaly_detector.detect_anomalies(fin_data, ratios)
 
-        # 6. ML Risk Prediction
+        # 6. ML Risk Prediction (Ensemble: Gradient Boosting + Random Forest + Logistic + Altman Z-Score + Piotroski F-Score)
         ml_risk = self.ml_risk_predictor.predict_risk(fin_data, ratios)
 
         # 7. NLP Analysis
@@ -112,7 +113,8 @@ class PipelineOrchestrator:
             verified_obj=verified_obj,
             length=length,
             tone=tone,
-            custom_api_key=custom_api_key
+            custom_api_key=custom_api_key,
+            model=model
         )
 
         # 10. Store in Version History
@@ -123,8 +125,8 @@ class PipelineOrchestrator:
             "created_at_formatted": datetime.now().strftime("%d %b %Y, %I:%M %p"),
             "length": length,
             "tone": tone,
-            "source": summary_result.get("source", "Gemini 3.5 Flash-Lite"),
-            "model": summary_result.get("model", "gemini-3.5-flash-lite"),
+            "source": summary_result.get("source", "Gemini 2.5 Flash"),
+            "model": summary_result.get("model", model or "gemini-2.5-flash"),
             "is_fallback": summary_result.get("is_fallback", False),
             "validation": summary_result.get("validation", {}),
             "audit_trail": summary_result.get("audit_trail", []),
@@ -158,7 +160,8 @@ class PipelineOrchestrator:
         report_id: str,
         length: str = "Standard",
         tone: str = "Professional",
-        custom_api_key: Optional[str] = None
+        custom_api_key: Optional[str] = None,
+        model: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Regenerates summary ONLY from existing verified analysis object.
@@ -179,7 +182,8 @@ class PipelineOrchestrator:
             verified_obj=verified_obj,
             length=length,
             tone=tone,
-            custom_api_key=custom_api_key
+            custom_api_key=custom_api_key,
+            model=model
         )
 
         new_version_entry = {
@@ -189,8 +193,8 @@ class PipelineOrchestrator:
             "created_at_formatted": datetime.now().strftime("%d %b %Y, %I:%M %p"),
             "length": length,
             "tone": tone,
-            "source": summary_result.get("source", "Gemini 3.5 Flash-Lite"),
-            "model": summary_result.get("model", "gemini-3.5-flash-lite"),
+            "source": summary_result.get("source", "Gemini 2.5 Flash"),
+            "model": summary_result.get("model", model or "gemini-2.5-flash"),
             "is_fallback": summary_result.get("is_fallback", False),
             "validation": summary_result.get("validation", {}),
             "audit_trail": summary_result.get("audit_trail", []),

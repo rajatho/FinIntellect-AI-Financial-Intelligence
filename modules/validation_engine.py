@@ -210,7 +210,8 @@ class ValidationEngine:
         verified_obj: Dict[str, Any],
         length: str = "Standard",
         tone: str = "Professional",
-        custom_api_key: str = None
+        custom_api_key: str = None,
+        model: str = None
     ) -> Dict[str, Any]:
         """
         Executes the full Section 20 workflow:
@@ -227,7 +228,8 @@ class ValidationEngine:
             verified_obj,
             length=length,
             tone=tone,
-            custom_api_key=custom_api_key
+            custom_api_key=custom_api_key,
+            model=model
         )
 
         if not res1.get("success"):
@@ -271,7 +273,8 @@ class ValidationEngine:
             length=length,
             tone=tone,
             correction_note=correction_note,
-            custom_api_key=custom_api_key
+            custom_api_key=custom_api_key,
+            model=model
         )
 
         if res2.get("success"):

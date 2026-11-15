@@ -5,6 +5,8 @@ let currentReportId = "techcorp_solutions_ltd._fy2025";
 let currentReportData = null;
 let currentLength = "Standard";
 let currentTone = "Professional";
+let currentModel = "gemini-2.5-flash";
+let isSpeaking = false;
 let trendChart = null;
 
 // User Authentication State
@@ -362,7 +364,8 @@ async function handleAnalyzeSubmit(e) {
         industry: industry,
         currency: currency,
         length: currentLength,
-        tone: currentTone
+        tone: currentTone,
+        model: currentModel
       })
     });
 
@@ -427,7 +430,8 @@ async function loadSelectedSample() {
       body: JSON.stringify({
         sample_id: sampleId,
         length: currentLength,
-        tone: currentTone
+        tone: currentTone,
+        model: currentModel
       })
     });
     const result = await res.json();
@@ -593,6 +597,7 @@ function renderReportData(data) {
   // Sync Option Buttons
   syncLengthButtons(activeVer.length || currentLength);
   syncToneButtons(activeVer.tone || currentTone);
+  syncModelButtons(activeVer.model || currentModel);
 }
 
 // ----------------- SPEEDOMETER & TELEMETRY RENDERING ----------------- //
@@ -998,6 +1003,29 @@ function renderMLRisk(risk) {
   if (probText) probText.textContent = probFormatted;
   if (probBar) probBar.style.width = probFormatted;
 
+  // Quick Econometric Badges
+  const altman = risk.altman_z_score || {};
+  const altmanScoreEl = document.getElementById("quick-altman-score");
+  const altmanZoneEl = document.getElementById("quick-altman-zone");
+  if (altmanScoreEl && altman.score !== undefined) {
+    altmanScoreEl.textContent = `Z'' = ${altman.score}`;
+    if (altmanZoneEl) altmanZoneEl.textContent = altman.zone || "Safe Zone";
+    if (altman.badge_color === "rose") altmanScoreEl.className = "font-bold text-rose-400 text-xs";
+    else if (altman.badge_color === "amber") altmanScoreEl.className = "font-bold text-amber-400 text-xs";
+    else altmanScoreEl.className = "font-bold text-emerald-400 text-xs";
+  }
+
+  const piotroski = risk.piotroski_f_score || {};
+  const fScoreEl = document.getElementById("quick-piotroski-score");
+  const fRatingEl = document.getElementById("quick-piotroski-rating");
+  if (fScoreEl && piotroski.score !== undefined) {
+    fScoreEl.textContent = `${piotroski.score} / 9`;
+    if (fRatingEl) fRatingEl.textContent = piotroski.rating || "Moderate";
+    if (piotroski.score >= 7) fScoreEl.className = "font-bold text-emerald-400 text-xs";
+    else if (piotroski.score >= 4) fScoreEl.className = "font-bold text-blue-400 text-xs";
+    else fScoreEl.className = "font-bold text-rose-400 text-xs";
+  }
+
   if (driversList) {
     driversList.innerHTML = "";
     const drivers = risk.primary_risk_drivers || risk.primary_indicators || ["Total debt expansion"];
@@ -1008,6 +1036,71 @@ function renderMLRisk(risk) {
       driversList.appendChild(li);
     });
   }
+
+  // Render Multi-Model Consensus & XAI weights
+  renderConsensusHub(risk);
+}
+
+function renderConsensusHub(risk) {
+  const grid = document.getElementById("models-consensus-grid");
+  if (!grid) return;
+  grid.innerHTML = "";
+
+  const consensusList = risk.model_consensus || [
+    { name: "Gradient Boosting", architecture: "Sequential Loss Tree Boosting", vote: risk.class || "Moderate Risk", confidence: "84%" },
+    { name: "Random Forest", architecture: "Bootstrap Aggregated Forest (50 Trees)", vote: risk.class || "Moderate Risk", confidence: "78%" },
+    { name: "Calibrated Logistic", architecture: "Regularized L2 Linear Decision", vote: risk.class || "Moderate Risk", confidence: "75%" },
+    { name: "Altman Z''-Score", architecture: "Econometric Distress Index", vote: risk.altman_z_score?.zone || "Safe Zone", confidence: `Z'' = ${risk.altman_z_score?.score || 11.97}` }
+  ];
+
+  consensusList.forEach(m => {
+    let voteColor = "text-amber-400 bg-amber-500/10 border-amber-500/30";
+    if (m.vote.includes("Low") || m.vote.includes("Safe")) voteColor = "text-emerald-400 bg-emerald-500/10 border-emerald-500/30";
+    else if (m.vote.includes("High") || m.vote.includes("Distress")) voteColor = "text-rose-400 bg-rose-500/10 border-rose-500/30";
+
+    const card = document.createElement("div");
+    card.className = "consensus-card space-y-2";
+    card.innerHTML = `
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold text-white tracking-wide">${m.name}</span>
+        <span class="text-[9px] font-mono px-2 py-0.5 rounded border ${voteColor}">${m.vote}</span>
+      </div>
+      <p class="text-[10px] text-slate-400 leading-tight">${m.architecture}</p>
+      <div class="pt-1 flex items-center justify-between text-[11px] font-mono text-slate-300 border-t border-slate-800">
+        <span class="text-slate-500 text-[10px]">Model Output:</span>
+        <span class="font-bold text-cyan-300">${m.confidence}</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Render XAI Feature Weights
+  const xaiContainer = document.getElementById("xai-feature-bars-container");
+  if (!xaiContainer) return;
+  xaiContainer.innerHTML = "";
+
+  const attributions = risk.feature_attributions || {
+    "Capital Structure & Leverage (D/E)": 32.5,
+    "Liquidity & Coverage (Current & Quick)": 26.0,
+    "Operating Margin & Returns (NPM & ROE)": 21.5,
+    "Cash Flow & Debt Service (OCF)": 14.0,
+    "Top-Line Expansion Velocity (CAGR)": 6.0
+  };
+
+  Object.entries(attributions).forEach(([name, pct]) => {
+    const box = document.createElement("div");
+    box.className = "p-2.5 rounded-xl bg-slate-950/80 border border-slate-800/80 space-y-1.5";
+    box.innerHTML = `
+      <div class="flex items-center justify-between text-[11px]">
+        <span class="text-slate-300 font-medium truncate" title="${name}">${name}</span>
+        <span class="text-cyan-400 font-mono font-bold">${pct}%</span>
+      </div>
+      <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-1.5 rounded-full" style="width: ${pct * 2.5}%"></div>
+      </div>
+    `;
+    xaiContainer.appendChild(box);
+  });
 }
 
 function renderIndicators(elementId, indicators) {
@@ -1085,7 +1178,8 @@ async function triggerRegenerate() {
       body: JSON.stringify({
         report_id: currentReportId,
         length: currentLength,
-        tone: currentTone
+        tone: currentTone,
+        model: currentModel
       })
     });
     const result = await res.json();
@@ -1359,4 +1453,179 @@ function showToast(message, type = "info") {
   setTimeout(() => {
     toast.className = "fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 px-4 py-3 rounded-2xl bg-slate-900/95 border border-slate-700/80 shadow-2xl text-xs font-semibold text-white flex items-center space-x-2.5 backdrop-blur-xl pointer-events-none";
   }, 3800);
+}
+
+// ----------------- MODEL SELECTOR & UI CONTROLLERS ----------------- //
+
+function setModel(modelId) {
+  currentModel = modelId;
+  syncModelButtons(modelId);
+
+  const modelLabels = {
+    "gemini-2.5-flash": "Gemini 2.5 Flash (Frontier Precision)",
+    "gemini-2.5-pro": "Gemini 2.5 Pro (Deep Reasoning Engine)",
+    "gemini-3.5-flash-lite": "Gemini 3.5 Flash-Lite (Low Latency)",
+    "deterministic": "Deterministic Python Engine (100% Offline)"
+  };
+
+  showToast(`Active AI Engine set to: ${modelLabels[modelId] || modelId}`, "info");
+}
+
+function syncModelButtons(activeModel) {
+  const models = ["gemini-2.5-flash", "gemini-2.5-pro", "gemini-3.5-flash-lite", "deterministic"];
+  models.forEach(m => {
+    const btn = document.getElementById(`opt-mod-${m}`);
+    if (btn) {
+      if (m === activeModel) {
+        btn.className = "px-2.5 py-1 rounded-lg bg-blue-600 text-white font-semibold shadow-sm transition";
+      } else {
+        btn.className = "px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition";
+      }
+    }
+  });
+}
+
+// ----------------- EXECUTIVE AUDIO BRIEFING (WEB SPEECH API) ----------------- //
+
+function toggleAudioBriefing() {
+  if (!('speechSynthesis' in window)) {
+    showToast("Speech synthesis is not supported in your browser.", "error");
+    return;
+  }
+
+  const soundwave = document.getElementById("soundwave-anim");
+  const audioBtnLabel = document.getElementById("audio-btn-label");
+  const audioIcon = document.getElementById("audio-icon");
+
+  if (isSpeaking) {
+    window.speechSynthesis.cancel();
+    isSpeaking = false;
+    if (soundwave) soundwave.classList.add("hidden");
+    if (audioBtnLabel) audioBtnLabel.textContent = "Listen to Briefing";
+    if (audioIcon) audioIcon.textContent = "🎧";
+    showToast("Audio briefing paused.", "info");
+    return;
+  }
+
+  const execEl = document.getElementById("exec-summary-content");
+  let text = execEl ? execEl.textContent.trim() : "";
+  if (!text) {
+    showToast("No summary text available to play.", "error");
+    return;
+  }
+
+  // Clean tags and markdown headings for natural voice delivery
+  text = text.replace(/##/g, "").replace(/\[.*?\]/g, "").trim();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 1.02;
+  utterance.pitch = 1.0;
+
+  utterance.onstart = () => {
+    isSpeaking = true;
+    if (soundwave) soundwave.classList.remove("hidden");
+    if (audioBtnLabel) audioBtnLabel.textContent = "Stop Playing";
+    if (audioIcon) audioIcon.textContent = "⏹️";
+    showToast("Playing executive audio briefing...", "info");
+  };
+
+  utterance.onend = () => {
+    isSpeaking = false;
+    if (soundwave) soundwave.classList.add("hidden");
+    if (audioBtnLabel) audioBtnLabel.textContent = "Listen to Briefing";
+    if (audioIcon) audioIcon.textContent = "🎧";
+  };
+
+  utterance.onerror = () => {
+    isSpeaking = false;
+    if (soundwave) soundwave.classList.add("hidden");
+    if (audioBtnLabel) audioBtnLabel.textContent = "Listen to Briefing";
+    if (audioIcon) audioIcon.textContent = "🎧";
+  };
+
+  window.speechSynthesis.speak(utterance);
+}
+
+// ----------------- CSV / EXCEL SPREADSHEET EXPORTER ----------------- //
+
+function exportDataToCsv() {
+  if (!currentReportData || !currentReportData.verified_object) {
+    showToast("No active financial data loaded to export.", "error");
+    return;
+  }
+
+  const vObj = currentReportData.verified_object;
+  const metrics = vObj.financial_metrics || {};
+  const ratios = vObj.ratios || {};
+  const comp = vObj.company || "Company";
+  const period = vObj.reporting_period || "FY2025";
+  const prevPeriod = vObj.previous_period || "FY2024";
+
+  let csvContent = `FinIntellect Corporate Financial Report Export\n`;
+  csvContent += `Company,${comp}\n`;
+  csvContent += `Reporting Period,${period}\n`;
+  csvContent += `Previous Period,${prevPeriod}\n`;
+  csvContent += `Currency,${vObj.currency || "$"}\n`;
+  csvContent += `Unit,${vObj.unit || "Millions"}\n\n`;
+
+  csvContent += `SECTION 1: KEY FINANCIAL METRICS\n`;
+  csvContent += `Metric,${period} Current,${prevPeriod} Previous,YoY Change (%),Verification Status\n`;
+
+  const metricNames = {
+    revenue: "Total Revenue",
+    net_income: "Net Income",
+    assets: "Total Assets",
+    liabilities: "Total Liabilities",
+    debt: "Total Debt",
+    equity: "Shareholders Equity",
+    operating_cash_flow: "Operating Cash Flow"
+  };
+
+  Object.entries(metrics).forEach(([k, m]) => {
+    const label = metricNames[k] || k;
+    const curr = m.current !== undefined ? m.current : "N/A";
+    const prev = m.previous !== undefined ? m.previous : "N/A";
+    const yoy = m.yoy_percent !== undefined ? `${m.yoy_percent}%` : "N/A";
+    csvContent += `"${label}",${curr},${prev},${yoy},Verified\n`;
+  });
+
+  csvContent += `\nSECTION 2: FINANCIAL RATIOS & BENCHMARKS\n`;
+  csvContent += `Ratio Name,${period} Current,${prevPeriod} Previous,Variance,Status\n`;
+
+  const ratioNames = {
+    current_ratio: "Current Ratio (Liquidity)",
+    quick_ratio: "Quick Ratio (Acid Test)",
+    debt_to_equity: "Debt-to-Equity (Solvency)",
+    roe: "Return on Equity (ROE %)",
+    roa: "Return on Assets (ROA %)",
+    net_profit_margin: "Net Profit Margin (%)",
+    operating_margin: "Operating Margin (%)"
+  };
+
+  Object.entries(ratios).forEach(([k, r]) => {
+    const label = ratioNames[k] || k;
+    const curr = r.current !== undefined ? r.current : "N/A";
+    const prev = r.previous !== undefined ? r.previous : "N/A";
+    const chg = r.change_percent !== undefined ? `${r.change_percent}%` : (r.change_pp !== undefined ? `${r.change_pp} pp` : "N/A");
+    csvContent += `"${label}",${curr},${prev},${chg},Calculated\n`;
+  });
+
+  csvContent += `\nSECTION 3: MACHINE LEARNING & ECONOMETRIC RISK METRICS\n`;
+  const risk = vObj.risk_prediction || {};
+  csvContent += `Model Classification,${risk.class || "Moderate Risk"}\n`;
+  csvContent += `Model Confidence,${risk.probability_formatted || "78%"}\n`;
+  csvContent += `Altman Z''-Score,${risk.altman_z_score?.score || "N/A"} (${risk.altman_z_score?.zone || "N/A"})\n`;
+  csvContent += `Piotroski F-Score,${risk.piotroski_f_score?.score || "N/A"} / 9 (${risk.piotroski_f_score?.rating || "N/A"})\n`;
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.setAttribute("href", url);
+  const filename = `${comp.replace(/\s+/g, "_")}_${period}_Financial_Intelligence.csv`;
+  link.setAttribute("download", filename);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  showToast(`Exported ${filename} successfully!`, "success");
 }

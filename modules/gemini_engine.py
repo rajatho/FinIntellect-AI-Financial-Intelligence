@@ -9,7 +9,12 @@ class GeminiEngine:
     Uses Gemini 3.5 Flash-Lite / 3.6 Flash with strictly grounded prompt instructions.
     """
 
-    DEFAULT_MODEL = "gemini-3.5-flash-lite"
+    DEFAULT_MODEL = "gemini-2.5-flash"
+    AVAILABLE_MODELS = [
+        {"id": "gemini-2.5-flash", "name": "Gemini 2.5 Flash", "badge": "High Accuracy & Fast", "desc": "Frontier multimodal & financial reasoning"},
+        {"id": "gemini-2.5-pro", "name": "Gemini 2.5 Pro", "badge": "Deep Financial Intelligence", "desc": "Maximum reasoning depth for complex corporate audits"},
+        {"id": "gemini-3.5-flash-lite", "name": "Gemini 3.5 Flash-Lite", "badge": "Ultra Low Latency", "desc": "Instantaneous financial report synthesis"}
+    ]
     DYNAMIC_DEFAULT_KEY = ""
 
     def __init__(self, api_key: Optional[str] = None):
@@ -90,10 +95,11 @@ Use actual values supplied in the input. Never invent any facts or reasons.
         length: str = "Standard",
         tone: str = "Professional",
         correction_note: Optional[str] = None,
-        custom_api_key: Optional[str] = None
+        custom_api_key: Optional[str] = None,
+        model: Optional[str] = None
     ) -> Dict[str, Any]:
         """
-        Calls Gemini 3.5 Flash-Lite to generate the summary.
+        Calls Gemini frontier models (Gemini 2.5 Flash / Gemini 2.5 Pro / Gemini 3.5 Flash-Lite) to generate the summary.
         """
         api_key = custom_api_key or self.api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
         if not api_key:
@@ -107,7 +113,8 @@ Use actual values supplied in the input. Never invent any facts or reasons.
 
         # Attempt SDK first, fallback to REST API
         text_response = None
-        used_model = self.DEFAULT_MODEL
+        target_model = model or self.DEFAULT_MODEL
+        used_model = target_model
         error_msg = None
 
         try:
@@ -119,17 +126,21 @@ Use actual values supplied in the input. Never invent any facts or reasons.
                 top_p=0.95
             )
             response = client.models.generate_content(
-                model=used_model,
+                model=target_model,
                 contents=prompt,
                 config=config
             )
             text_response = response.text
+            used_model = target_model
         except Exception as e:
             # Fallback to direct REST API call
             error_msg = str(e)
             try:
-                candidate_models = [self.DEFAULT_MODEL, "gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
-                for candidate in candidate_models:
+                candidate_models = [target_model, "gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-3.5-flash-lite"]
+                # Deduplicate candidates preserving order
+                seen = set()
+                candidates = [m for m in candidate_models if not (m in seen or seen.add(m))]
+                for candidate in candidates:
                     url = f"https://generativelanguage.googleapis.com/v1beta/models/{candidate}:generateContent?key={api_key}"
                     payload = {
                         "contents": [{"parts": [{"text": prompt}]}],

@@ -97,6 +97,26 @@ def auth_guest_login():
 def index():
     return render_template("index.html")
 
+@app.route("/api/models", methods=["GET"])
+def get_available_models():
+    """List available AI models and econometric engines."""
+    from modules.gemini_engine import GeminiEngine
+    return jsonify({
+        "success": True,
+        "default_model": GeminiEngine.DEFAULT_MODEL,
+        "models": GeminiEngine.AVAILABLE_MODELS,
+        "ml_ensemble": {
+            "name": "Institutional Multi-Model ML Ensemble",
+            "components": [
+                "Gradient Boosting Classifier (Loss-Minimized Decision Trees)",
+                "Random Forest Classifier (Bagged Decision Forest)",
+                "Calibrated Regularized Logistic Regression",
+                "Altman Z''-Score Econometric Distress Engine",
+                "Piotroski F-Score Fundamental Strength Index"
+            ]
+        }
+    })
+
 @app.route("/api/samples", methods=["GET"])
 def get_samples():
     """List available preloaded corporate reports."""
@@ -149,6 +169,7 @@ def analyze_report():
     sample_id = payload.get("sample_id")
     length = payload.get("length", "Standard")
     tone = payload.get("tone", "Professional")
+    model_name = payload.get("model") or payload.get("model_name")
     industry = payload.get("industry", "Technology & Software")
     reporting_period = payload.get("reporting_period", "FY2025")
     currency = payload.get("currency", "$")
@@ -178,7 +199,8 @@ def analyze_report():
             document_data=doc_data,
             length=length,
             tone=tone,
-            custom_api_key=custom_api_key
+            custom_api_key=custom_api_key,
+            model=model_name
         )
         user, _ = get_current_user()
         if user and "report_id" in result:
@@ -198,6 +220,7 @@ def regenerate_summary():
     report_id = payload.get("report_id")
     length = payload.get("length", "Standard")
     tone = payload.get("tone", "Professional")
+    model_name = payload.get("model") or payload.get("model_name")
     custom_api_key = payload.get("api_key") or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
 
     if not report_id:
@@ -208,7 +231,8 @@ def regenerate_summary():
             report_id=report_id,
             length=length,
             tone=tone,
-            custom_api_key=custom_api_key
+            custom_api_key=custom_api_key,
+            model=model_name
         )
         return jsonify({"success": True, "data": result})
     except Exception as e:

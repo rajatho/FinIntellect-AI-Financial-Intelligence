@@ -125,6 +125,7 @@ class VerifiedObjectBuilder:
                 "probability": ml_risk_data.get("probability", 78.0),
                 "probability_formatted": ml_risk_data.get("probability_formatted", "78%"),
                 "risk_meter_score": ml_risk_data.get("risk_meter_score", 50.0),
+                "model_type": ml_risk_data.get("model_type", "Multi-Model Voting Ensemble"),
                 "class_probabilities": ml_risk_data.get("class_probabilities", {
                     "low_risk": 14.0,
                     "moderate_risk": 78.0,
@@ -132,7 +133,12 @@ class VerifiedObjectBuilder:
                 }),
                 "primary_risk_drivers": ml_risk_data.get("primary_indicators", ["Total debt expansion"]),
                 "primary_indicators": ml_risk_data.get("primary_indicators", []),
-                "positive_indicators": ml_risk_data.get("positive_indicators", [])
+                "positive_indicators": ml_risk_data.get("positive_indicators", []),
+                "altman_z_score": ml_risk_data.get("altman_z_score", {}),
+                "piotroski_f_score": ml_risk_data.get("piotroski_f_score", {}),
+                "feature_attributions": ml_risk_data.get("feature_attributions", {}),
+                "model_consensus": ml_risk_data.get("model_consensus", []),
+                "feature_inputs": ml_risk_data.get("feature_inputs", {})
             },
             "positive_indicators": positive_indicators,
             "risk_indicators": risk_indicators,

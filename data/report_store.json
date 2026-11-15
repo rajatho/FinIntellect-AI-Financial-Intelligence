@@ -320,6 +320,18 @@
         "class": "Moderate Risk",
         "probability": 78.0,
         "probability_formatted": "78%",
+        "risk_meter_score": 46.9,
+        "model_type": "Multi-Model Voting Ensemble (Gradient Boosting + Random Forest + Logistic Regression)",
+        "class_probabilities": {
+          "low_risk": 16.0,
+          "moderate_risk": 84.0,
+          "high_risk": 0.1
+        },
+        "primary_risk_drivers": [
+          "Debt-to-equity increased",
+          "Profit growth declined",
+          "Current ratio decreased"
+        ],
         "primary_indicators": [
           "Debt-to-equity increased",
           "Profit growth declined",
@@ -328,7 +340,114 @@
         "positive_indicators": [
           "Revenue increased",
           "Operating cash flow improved"
-        ]
+        ],
+        "altman_z_score": {
+          "score": 11.97,
+          "zone": "Safe Zone",
+          "description": "Negligible risk of short-to-medium term financial distress or insolvency.",
+          "badge_color": "emerald",
+          "thresholds": {
+            "safe": "> 2.60",
+            "grey": "1.10 \u2013 2.60",
+            "distress": "< 1.10"
+          }
+        },
+        "piotroski_f_score": {
+          "score": 6,
+          "max_score": 9,
+          "rating": "Stable / Moderate",
+          "strength": "Medium",
+          "passed_checks_count": 6,
+          "checks": [
+            {
+              "name": "Positive Net Income",
+              "passed": true,
+              "category": "Profitability"
+            },
+            {
+              "name": "Positive Return on Assets",
+              "passed": true,
+              "category": "Profitability"
+            },
+            {
+              "name": "Positive Operating Cash Flow",
+              "passed": true,
+              "category": "Cash Quality"
+            },
+            {
+              "name": "Operating Cash Flow exceeds Net Income",
+              "passed": true,
+              "category": "Cash Quality"
+            },
+            {
+              "name": "Liquidity (Current Ratio) Preserved/Improved",
+              "passed": false,
+              "category": "Liquidity"
+            },
+            {
+              "name": "Leverage Managed (D/E not expanding)",
+              "passed": false,
+              "category": "Leverage"
+            },
+            {
+              "name": "No Dilutive Equity Issuance",
+              "passed": true,
+              "category": "Capital Structure"
+            },
+            {
+              "name": "Margin Expansion (NPM stable/improving)",
+              "passed": false,
+              "category": "Efficiency"
+            },
+            {
+              "name": "Top-Line Revenue Expansion",
+              "passed": true,
+              "category": "Efficiency"
+            }
+          ]
+        },
+        "feature_attributions": {
+          "Capital Structure & Leverage (D/E)": 32.5,
+          "Liquidity & Coverage (Current & Quick)": 26.0,
+          "Operating Margin & Returns (NPM & ROE)": 21.5,
+          "Cash Flow & Debt Service (OCF)": 14.0,
+          "Top-Line Expansion Velocity (CAGR)": 6.0
+        },
+        "model_consensus": [
+          {
+            "name": "Gradient Boosting Classifier",
+            "architecture": "Sequential Loss-Minimized Tree Boosting",
+            "vote": "Moderate Risk",
+            "confidence": "99%"
+          },
+          {
+            "name": "Random Forest Classifier",
+            "architecture": "Bootstrap Aggregated Decision Forest (50 Trees)",
+            "vote": "Moderate Risk",
+            "confidence": "84%"
+          },
+          {
+            "name": "Calibrated Logistic Regression",
+            "architecture": "Regularized L2 Linear Decision Boundary",
+            "vote": "Moderate Risk",
+            "confidence": "52%"
+          },
+          {
+            "name": "Altman Z''-Score Econometric Engine",
+            "architecture": "Multivariate Credit Scoring (NYU Stern Formulation)",
+            "vote": "Safe Zone",
+            "confidence": "Z'' = 11.97"
+          }
+        ],
+        "feature_inputs": {
+          "current_ratio": 1.45,
+          "quick_ratio": 1.09,
+          "debt_to_equity": 0.98,
+          "net_profit_margin_pct": 11.21,
+          "roe_pct": 15.12,
+          "revenue_growth_pct": 8.4,
+          "ocf_positive": true
+        }
       },
       "positive_indicators": [
         "Revenue growth of 8.41% year-over-year",
@@ -384,13 +503,13 @@
       {
         "version_num": 1,
         "version_label": "Summary v1",
-        "created_at": "2026-09-25T10:48:55.237490",
-        "created_at_formatted": "25 Sep 2026, 10:48 AM",
+        "created_at": "2026-11-15T15:36:25.682287",
+        "created_at_formatted": "15 Nov 2026, 03:36 PM",
         "length": "Standard",
         "tone": "Professional",
-        "source": "Gemini (gemini-3.5-flash-lite)",
-        "model": "gemini-3.5-flash-lite",
-        "is_fallback": false,
+        "source": "Python Deterministic Fallback Engine",
+        "model": "Deterministic Rule-Based (Python)",
+        "is_fallback": true,
         "validation": {
           "is_valid": true,
           "checks": [
@@ -457,28 +576,124 @@
         "audit_trail": [
           {
             "attempt": 1,
-            "status": "PASSED",
-            "detail": "AI summary passed all 7 accuracy checks on first generation."
+            "status": "API_UNAVAILABLE",
+            "detail": "GEMINI_API_KEY is not set. Please provide an API key in settings."
           }
         ],
         "sections": {
-          "executive_summary": "This financial analysis summary evaluates the performance of TechCorp Solutions Ltd. for the reporting period FY2025, with comparative metrics referencing FY2024 and historical periods dating back to FY2022. The facts indicate top-line revenue expansion accompanied by contractions in net income, profitability ratios, and liquidity, alongside a substantial increase in total debt.",
-          "financial_performance": "For FY2025, TechCorp Solutions Ltd. reported consolidated top-line revenue of \u20b95,800.0 million (\u20b95.8B), representing a year-over-year increase of 8.41% (\u20b9450.0 million) compared to \u20b95,350.0 million (\u20b95.3B) in FY2024. Net income for FY2025 was \u20b9650.0 million (\u20b9650M), reflecting a year-over-year decrease of 4.2% (-\u20b928.5 million) from \u20b9678.5 million in FY2024. Total assets grew to \u20b99,550.0 million (\u20b99.6B) in FY2025 from \u20b99,000.0 million (\u20b99B) in FY2024, representing a 6.11% (\u20b9550.0 million) increase. Total liabilities rose to \u20b95,250.0 million (\u20b95.2B) from \u20b94,700.0 million (\u20b94.7B), marking an 11.7% (\u20b9550.0 million) increase. Equity remained flat at \u20b94,300.0 million (\u20b94.3B) with a 0.0% year-over-year change. Operating cash flow reached \u20b9910.0 million (\u20b9910M) in FY2025, up 10.98% (\u20b990.0 million) from \u20b9820.0 million in FY2024.",
-          "profitability": "Profitability metrics and ratios for FY2025 demonstrate contractions compared to the previous period:\n* **Return on Equity (ROE):** 15.12% in FY2025 compared to 15.78% in FY2024 (a change of -4.18% or -0.66 percentage points).\n* **Return on Assets (ROA):** 6.81% in FY2025 compared to 7.54% in FY2024 (a change of -9.68% or -0.73 percentage points).\n* **Net Profit Margin:** 11.21% in FY2025 compared to 12.68% in FY2024 (a change of -11.59% or -1.47 percentage points).\n* **Operating Margin:** 16.55% in FY2025 compared to 18.69% in FY2024 (a change of -11.45% or -2.14 percentage points).\n* **Operating Income:** Stood at \u20b9960.0 million (\u20b9960M) in FY2025, compared to \u20b91,000.0 million (\u20b91B) in FY2024.",
-          "liquidity": "Liquidity ratios weakened during FY2025:\n* **Current Ratio:** Decreased to 1.45 in FY2025 from 1.62 in FY2024, representing a change of -10.49%.\n* **Quick Ratio:** Decreased to 1.09 in FY2025 from 1.21 in FY2024, representing a change of -9.92% (interpreted as immediate liquidity softening).",
-          "solvency": "Solvency metrics reflect increased financial leverage in FY2025:\n* **Total Debt:** Reached \u20b94,200.0 million (\u20b94.2B) in FY2025 compared to \u20b93,000.0 million (\u20b93B) in FY2024, representing a 40.0% year-over-year increase (\u20b91,200.0 million absolute change).\n* **Debt-to-Equity Ratio:** Increased to 0.98 in FY2025 from 0.7 in FY2024, marking a 40.0% change. *(Note: Important statements alternatively note a gross debt of \u20b94,200M taking the debt-to-equity ratio to 1.42 against 1.15 in FY2024).*",
-          "efficiency": "Data unavailable.",
-          "growth": "* **Revenue Trend:** Demonstrated a consistent increase across FY2022 (\u20b94,800.0 million / \u20b94.8B), FY2023 (\u20b95,100.0 million / \u20b95.1B), FY2024 (\u20b95,350.0 million / \u20b95.3B), and FY2025 (\u20b95,800.0 million / \u20b95.8B), yielding a CAGR of 6.51%.\n* **Net Income Trend:** Exhibited fluctuations, moving from \u20b9547.5 million in FY2022 to \u20b9600.0 million in FY2023, \u20b9678.5 million in FY2024, and \u20b9650.0 million in FY2025, recording a net CAGR of 5.89%.\n* **Operating Income Trend:** Fluctuated from \u20b9850.0 million in FY2022, \u20b9930.0 million in FY2023, \u20b91,000.0 million in FY2024, to \u20b9960.0 million in FY2025, achieving a CAGR of 4.14%.\n* **Total Debt Trend:** Increased consistently from FY2024 (\u20b93,000.0 million / \u20b93B) to FY2025 (\u20b94,200.0 million / \u20b94.2B) at a CAGR of 40.0%.\n* **Operating Cash Flow Trend:** Increased consistently from FY2024 (\u20b9820.0 million) to FY2025 (\u20b9910.0 million) at a CAGR of 10.98%.",
-          "risk_analysis": "Risk indicators comprise:\n* Increasing debt (total debt grew by 40.0% to \u20b94.2B).\n* Declining profit (net profit contracted by 4.2% to \u20b9650M).\n* Falling liquidity (current ratio weakened by 10.49% to 1.45).\n* Elevated leverage (Debt-to-Equity increased to 0.98).\n* Declining profitability ratio (net margin contracted by 1.47 percentage points to 11.21%).\n* Unusual financial movements (2 significant financial anomalies detected).",
-          "anomalies": "Detected via Isolation Forest and statistical threshold methods in FY2025:\n1. **Total Debt:** Substantial expansion of 40.0% from \u20b93.0B (FY2024) to \u20b94.2B (FY2025). Severity: HIGH.\n2. **Debt-to-Equity Leverage:** Escalated sharply by 40.0% from 0.7 to 0.98. Severity: HIGH.",
-          "positive_indicators": "* Revenue growth of 8.41% year-over-year.\n* Improved operating cash flow, up 10.98% to \u20b9910.0 million.\n* Sustained operating cash generation and management allocation of \u20b9720 million toward infrastructure capital expenditures during FY2025.",
-          "key_financial_insights": "* Top-line expansion to \u20b95.8B in FY2025 did not translate into net income growth, as net profit declined by 4.2% to \u20b9650.0 million.\n* Financial leverage expanded significantly, driven by a 40.0% increase in total debt.\n* Despite profitability and liquidity contractions, operational cash flow generation remained positive and demonstrated year-over-year growth.",
-          "overall_analytical_assessment": "The machine-learning risk prediction model classifies TechCorp Solutions Ltd. for FY2025 as **Moderate Risk** with a **78%** probability. \n* **Primary Risk Indicators:** Debt-to-equity increased, profit growth declined, and the current ratio decreased.\n* **Positive Indicators:** Revenue increased and operating cash flow improved."
+          "executive_summary": "For TechCorp Solutions Ltd., consolidated revenue increased by 8.41% during FY2025, reaching \u20b95.8B. Net profit declined by 4.2%, totaling \u20b9650M. Debt-to-equity shifted from 0.7 to 0.98. The ML model classified the financial condition as Moderate Risk with 78% confidence. Key attention areas include leverage adjustments and profit margins.",
+          "financial_performance": "Revenue: \u20b95.8B (YoY Change: +8.41%)\nNet Income: \u20b9650M (YoY Change: -4.2%)\nTotal Assets: \u20b99.6B\nTotal Debt: \u20b94.2B\nOperating Cash Flow: \u20b9910M\n\nInterpretation: During FY2025, top-line revenue moved by +8.41% compared to FY2024, while bottom-line net profit registered a movement of -4.2%.",
+          "profitability": "Net profit margin was recorded at 11.21% during FY2025. Return on Equity (ROE) stood at 15.12%, and Return on Assets (ROA) was 6.81%. Operating margins reflect verified accounting line items.",
+          "liquidity": "The current ratio stood at 1.45 in FY2025 compared to 1.62 in FY2024. Interpretation: Liquidity decreased. Quick ratio was 1.09.",
+          "solvency": "Debt-to-equity ratio reached 0.98 against 0.7 in the prior period. Interpretation: Leverage increased. Total debt obligations are reported at \u20b94.2B.",
+          "efficiency": "Asset utilization and balance sheet capacity are grounded in total reported assets of \u20b99.6B supporting revenue generation of \u20b95.8B.",
+          "growth": "Annual top-line expansion was +8.41%. Operating cash generation stood at \u20b9910M.",
+          "risk_analysis": "ML RISK ASSESSMENT\nPrediction: Moderate Risk\nProbability: 78%\nPrimary indicators:\n\u2022 Debt-to-equity increased\n\u2022 Profit growth declined\n\u2022 Current ratio decreased",
+          "anomalies": "ANOMALY DETECTED\nMetric: Total Debt\nPeriod: FY2025\nPrevious: \u20b93B\nCurrent: \u20b94.2B\nChange: 40.0%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: The report shows a substantial expansion of 40.0% in reported total debt compared with the previous period (\u20b93B in FY2024 to \u20b94.2B in FY2025).\n\nANOMALY DETECTED\nMetric: Debt-to-Equity Leverage\nPeriod: FY2025\nPrevious: 0.7\nCurrent: 0.98\nChange: 40.0%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: Leverage ratio escalated sharply by 40.0% from 0.7 to 0.98.",
+          "positive_indicators": "## Positive Financial Indicators\n\u2022 Revenue growth of 8.41% year-over-year\n\u2022 Improved operating cash flow (up 10.98%)",
+          "key_financial_insights": "1. Top-line revenue established at \u20b95.8B with growth of +8.41%.\n2. Profitability resulted in net income of \u20b9650M (-4.2%).\n3. Balance sheet leverage indicated by debt-to-equity of 0.98 and total debt of \u20b94.2B.\n4. Isolation Forest and statistical testing highlighted 2 notable variations.",
+          "overall_analytical_assessment": "The available financial data indicates that revenue changed by +8.41% during FY2025, while net profit recorded -4.2%. Leverage stood at 0.98 and liquidity measured 1.45 based on verified ratios. The machine-learning model classified the company as Moderate Risk with 78% confidence based on the supplied financial features.\n\nThis assessment reflects the available financial data and model output and should not be interpreted as professional investment advice."
         },
-        "full_markdown": "## Executive Summary\nThis financial analysis summary evaluates the performance of TechCorp Solutions Ltd. for the reporting period FY2025, with comparative metrics referencing FY2024 and historical periods dating back to FY2022. The facts indicate top-line revenue expansion accompanied by contractions in net income, profitability ratios, and liquidity, alongside a substantial increase in total debt. \n\n## Financial Performance\nFor FY2025, TechCorp Solutions Ltd. reported consolidated top-line revenue of \u20b95,800.0 million (\u20b95.8B), representing a year-over-year increase of 8.41% (\u20b9450.0 million) compared to \u20b95,350.0 million (\u20b95.3B) in FY2024. Net income for FY2025 was \u20b9650.0 million (\u20b9650M), reflecting a year-over-year decrease of 4.2% (-\u20b928.5 million) from \u20b9678.5 million in FY2024. Total assets grew to \u20b99,550.0 million (\u20b99.6B) in FY2025 from \u20b99,000.0 million (\u20b99B) in FY2024, representing a 6.11% (\u20b9550.0 million) increase. Total liabilities rose to \u20b95,250.0 million (\u20b95.2B) from \u20b94,700.0 million (\u20b94.7B), marking an 11.7% (\u20b9550.0 million) increase. Equity remained flat at \u20b94,300.0 million (\u20b94.3B) with a 0.0% year-over-year change. Operating cash flow reached \u20b9910.0 million (\u20b9910M) in FY2025, up 10.98% (\u20b990.0 million) from \u20b9820.0 million in FY2024.\n\n## Profitability\nProfitability metrics and ratios for FY2025 demonstrate contractions compared to the previous period:\n* **Return on Equity (ROE):** 15.12% in FY2025 compared to 15.78% in FY2024 (a change of -4.18% or -0.66 percentage points).\n* **Return on Assets (ROA):** 6.81% in FY2025 compared to 7.54% in FY2024 (a change of -9.68% or -0.73 percentage points).\n* **Net Profit Margin:** 11.21% in FY2025 compared to 12.68% in FY2024 (a change of -11.59% or -1.47 percentage points).\n* **Operating Margin:** 16.55% in FY2025 compared to 18.69% in FY2024 (a change of -11.45% or -2.14 percentage points).\n* **Operating Income:** Stood at \u20b9960.0 million (\u20b9960M) in FY2025, compared to \u20b91,000.0 million (\u20b91B) in FY2024.\n\n## Liquidity\nLiquidity ratios weakened during FY2025:\n* **Current Ratio:** Decreased to 1.45 in FY2025 from 1.62 in FY2024, representing a change of -10.49%.\n* **Quick Ratio:** Decreased to 1.09 in FY2025 from 1.21 in FY2024, representing a change of -9.92% (interpreted as immediate liquidity softening).\n\n## Solvency\nSolvency metrics reflect increased financial leverage in FY2025:\n* **Total Debt:** Reached \u20b94,200.0 million (\u20b94.2B) in FY2025 compared to \u20b93,000.0 million (\u20b93B) in FY2024, representing a 40.0% year-over-year increase (\u20b91,200.0 million absolute change).\n* **Debt-to-Equity Ratio:** Increased to 0.98 in FY2025 from 0.7 in FY2024, marking a 40.0% change. *(Note: Important statements alternatively note a gross debt of \u20b94,200M taking the debt-to-equity ratio to 1.42 against 1.15 in FY2024).*\n\n## Efficiency\nData unavailable.\n\n## Growth\n* **Revenue Trend:** Demonstrated a consistent increase across FY2022 (\u20b94,800.0 million / \u20b94.8B), FY2023 (\u20b95,100.0 million / \u20b95.1B), FY2024 (\u20b95,350.0 million / \u20b95.3B), and FY2025 (\u20b95,800.0 million / \u20b95.8B), yielding a CAGR of 6.51%.\n* **Net Income Trend:** Exhibited fluctuations, moving from \u20b9547.5 million in FY2022 to \u20b9600.0 million in FY2023, \u20b9678.5 million in FY2024, and \u20b9650.0 million in FY2025, recording a net CAGR of 5.89%.\n* **Operating Income Trend:** Fluctuated from \u20b9850.0 million in FY2022, \u20b9930.0 million in FY2023, \u20b91,000.0 million in FY2024, to \u20b9960.0 million in FY2025, achieving a CAGR of 4.14%.\n* **Total Debt Trend:** Increased consistently from FY2024 (\u20b93,000.0 million / \u20b93B) to FY2025 (\u20b94,200.0 million / \u20b94.2B) at a CAGR of 40.0%.\n* **Operating Cash Flow Trend:** Increased consistently from FY2024 (\u20b9820.0 million) to FY2025 (\u20b9910.0 million) at a CAGR of 10.98%.\n\n## Risk Analysis\nRisk indicators comprise:\n* Increasing debt (total debt grew by 40.0% to \u20b94.2B).\n* Declining profit (net profit contracted by 4.2% to \u20b9650M).\n* Falling liquidity (current ratio weakened by 10.49% to 1.45).\n* Elevated leverage (Debt-to-Equity increased to 0.98).\n* Declining profitability ratio (net margin contracted by 1.47 percentage points to 11.21%).\n* Unusual financial movements (2 significant financial anomalies detected).\n\n## Anomalies\nDetected via Isolation Forest and statistical threshold methods in FY2025:\n1. **Total Debt:** Substantial expansion of 40.0% from \u20b93.0B (FY2024) to \u20b94.2B (FY2025). Severity: HIGH.\n2. **Debt-to-Equity Leverage:** Escalated sharply by 40.0% from 0.7 to 0.98. Severity: HIGH.\n\n## Positive Indicators\n* Revenue growth of 8.41% year-over-year.\n* Improved operating cash flow, up 10.98% to \u20b9910.0 million.\n* Sustained operating cash generation and management allocation of \u20b9720 million toward infrastructure capital expenditures during FY2025.\n\n## Key Financial Insights\n* Top-line expansion to \u20b95.8B in FY2025 did not translate into net income growth, as net profit declined by 4.2% to \u20b9650.0 million.\n* Financial leverage expanded significantly, driven by a 40.0% increase in total debt.\n* Despite profitability and liquidity contractions, operational cash flow generation remained positive and demonstrated year-over-year growth.\n\n## Overall Analytical Assessment\nThe machine-learning risk prediction model classifies TechCorp Solutions Ltd. for FY2025 as **Moderate Risk** with a **78%** probability. \n* **Primary Risk Indicators:** Debt-to-equity increased, profit growth declined, and the current ratio decreased.\n* **Positive Indicators:** Revenue increased and operating cash flow improved."
+        "full_markdown": "# Executive Summary\nFor TechCorp Solutions Ltd., consolidated revenue increased by 8.41% during FY2025, reaching \u20b95.8B. Net profit declined by 4.2%, totaling \u20b9650M. Debt-to-equity shifted from 0.7 to 0.98. The ML model classified the financial condition as Moderate Risk with 78% confidence. Key attention areas include leverage adjustments and profit margins.\n\n# Financial Performance\nRevenue: \u20b95.8B (YoY Change: +8.41%)\nNet Income: \u20b9650M (YoY Change: -4.2%)\nTotal Assets: \u20b99.6B\nTotal Debt: \u20b94.2B\nOperating Cash Flow: \u20b9910M\n\nInterpretation: During FY2025, top-line revenue moved by +8.41% compared to FY2024, while bottom-line net profit registered a movement of -4.2%.\n\n# Profitability\nNet profit margin was recorded at 11.21% during FY2025. Return on Equity (ROE) stood at 15.12%, and Return on Assets (ROA) was 6.81%. Operating margins reflect verified accounting line items.\n\n# Liquidity\nThe current ratio stood at 1.45 in FY2025 compared to 1.62 in FY2024. Interpretation: Liquidity decreased. Quick ratio was 1.09.\n\n# Solvency\nDebt-to-equity ratio reached 0.98 against 0.7 in the prior period. Interpretation: Leverage increased. Total debt obligations are reported at \u20b94.2B.\n\n# Risk Analysis\nML RISK ASSESSMENT\nPrediction: Moderate Risk\nProbability: 78%\nPrimary indicators:\n\u2022 Debt-to-equity increased\n\u2022 Profit growth declined\n\u2022 Current ratio decreased\n\n# Anomalies\nANOMALY DETECTED\nMetric: Total Debt\nPeriod: FY2025\nPrevious: \u20b93B\nCurrent: \u20b94.2B\nChange: 40.0%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: The report shows a substantial expansion of 40.0% in reported total debt compared with the previous period (\u20b93B in FY2024 to \u20b94.2B in FY2025).\n\nANOMALY DETECTED\nMetric: Debt-to-Equity Leverage\nPeriod: FY2025\nPrevious: 0.7\nCurrent: 0.98\nChange: 40.0%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: Leverage ratio escalated sharply by 40.0% from 0.7 to 0.98.\n\n## Positive Financial Indicators\n\u2022 Revenue growth of 8.41% year-over-year\n\u2022 Improved operating cash flow (up 10.98%)\n\n# Key Financial Insights\n1. Top-line revenue established at \u20b95.8B with growth of +8.41%.\n2. Profitability resulted in net income of \u20b9650M (-4.2%).\n3. Balance sheet leverage indicated by debt-to-equity of 0.98 and total debt of \u20b94.2B.\n4. Isolation Forest and statistical testing highlighted 2 notable variations.\n\n# Overall Analytical Assessment\nThe available financial data indicates that revenue changed by +8.41% during FY2025, while net profit recorded -4.2%. Leverage stood at 0.98 and liquidity measured 1.45 based on verified ratios. The machine-learning model classified the company as Moderate Risk with 78% confidence based on the supplied financial features.\n\nThis assessment reflects the available financial data and model output and should not be interpreted as professional investment advice."
+      },
+      {
+        "version_num": 2,
+        "version_label": "Summary v2",
+        "created_at": "2026-11-15T15:36:25.710795",
+        "created_at_formatted": "15 Nov 2026, 03:36 PM",
+        "length": "Detailed",
+        "tone": "Executive",
+        "source": "Python Deterministic Fallback Engine",
+        "model": "Deterministic Rule-Based (Python)",
+        "is_fallback": true,
+        "validation": {
+          "is_valid": true,
+          "checks": [
+            {
+              "id": 1,
+              "name": "Financial Values Grounding",
+              "passed": true,
+              "detail": "Verified key metrics: Revenue (\u20b95.8B), Net Income (\u20b9650M)",
+              "check_name": "Financial Values Grounding"
+            },
+            {
+              "id": 2,
+              "name": "Calculated Ratios Verification",
+              "passed": true,
+              "detail": "Verified Current Ratio, Debt-to-Equity, ROE, ROA, Profit Margins match calculated items",
+              "check_name": "Calculated Ratios Verification"
+            },
+            {
+              "id": 3,
+              "name": "ML Risk Classification Fidelity",
+              "passed": true,
+              "detail": "ML Risk classification correctly states 'Moderate Risk'",
+              "check_name": "ML Risk Classification Fidelity"
+            },
+            {
+              "id": 4,
+              "name": "Percentage Changes Consistency",
+              "passed": true,
+              "detail": "YoY growth deltas and percentage margins conform to verified calculations",
+              "check_name": "Percentage Changes Consistency"
+            },
+            {
+              "id": 5,
+              "name": "Reporting Period & Year Conformity",
+              "passed": true,
+              "detail": "Reporting period FY2025 verified",
+              "check_name": "Reporting Period & Year Conformity"
+            },
+            {
+              "id": 6,
+              "name": "Company Entity Grounding",
+              "passed": true,
+              "detail": "Grounded to verified company entity 'TechCorp Solutions Ltd.'",
+              "check_name": "Company Entity Grounding"
+            },
+            {
+              "id": 7,
+              "name": "Fact-Grounding (No Invented Causes)",
+              "passed": true,
+              "detail": "No unverified or invented causal statements detected",
+              "check_name": "Fact-Grounding (No Invented Causes)"
+            }
+          ],
+          "errors": [],
+          "score": "7/7 Passed",
+          "accuracy_percentage": 100.0,
+          "hallucination_score": 0.0,
+          "factual_grounding_score": 100.0,
+          "accounting_integrity_score": 100.0,
+          "passed_count": 7,
+          "total_count": 7,
+          "audit_status": "Zero Hallucinations Verified"
+        },
+        "audit_trail": [
+          {
+            "attempt": 1,
+            "status": "API_UNAVAILABLE",
+            "detail": "GEMINI_API_KEY is not set. Please provide an API key in settings."
+          }
+        ],
+        "sections": {
+          "executive_summary": "Key corporate performance overview for executive leadership. For TechCorp Solutions Ltd., consolidated revenue increased by 8.41% during FY2025, reaching \u20b95.8B. Net profit declined by 4.2%, totaling \u20b9650M. Debt-to-equity shifted from 0.7 to 0.98. The ML model classified the financial condition as Moderate Risk with 78% confidence. Key attention areas include leverage adjustments and profit margins.",
+          "financial_performance": "Revenue: \u20b95.8B (YoY Change: +8.41%)\nNet Income: \u20b9650M (YoY Change: -4.2%)\nTotal Assets: \u20b99.6B\nTotal Debt: \u20b94.2B\nOperating Cash Flow: \u20b9910M\n\nInterpretation: During FY2025, top-line revenue moved by +8.41% compared to FY2024, while bottom-line net profit registered a movement of -4.2%.",
+          "profitability": "Net profit margin was recorded at 11.21% during FY2025. Return on Equity (ROE) stood at 15.12%, and Return on Assets (ROA) was 6.81%. Operating margins reflect verified accounting line items.",
+          "liquidity": "The current ratio stood at 1.45 in FY2025 compared to 1.62 in FY2024. Interpretation: Liquidity decreased. Quick ratio was 1.09.",
+          "solvency": "Debt-to-equity ratio reached 0.98 against 0.7 in the prior period. Interpretation: Leverage increased. Total debt obligations are reported at \u20b94.2B.",
+          "efficiency": "Asset utilization and balance sheet capacity are grounded in total reported assets of \u20b99.6B supporting revenue generation of \u20b95.8B.",
+          "growth": "Annual top-line expansion was +8.41%. Operating cash generation stood at \u20b9910M.",
+          "risk_analysis": "ML RISK ASSESSMENT\nPrediction: Moderate Risk\nProbability: 78%\nPrimary indicators:\n\u2022 Debt-to-equity increased\n\u2022 Profit growth declined\n\u2022 Current ratio decreased",
+          "anomalies": "ANOMALY DETECTED\nMetric: Total Debt\nPeriod: FY2025\nPrevious: \u20b93B\nCurrent: \u20b94.2B\nChange: 40.0%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: The report shows a substantial expansion of 40.0% in reported total debt compared with the previous period (\u20b93B in FY2024 to \u20b94.2B in FY2025).\n\nANOMALY DETECTED\nMetric: Debt-to-Equity Leverage\nPeriod: FY2025\nPrevious: 0.7\nCurrent: 0.98\nChange: 40.0%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: Leverage ratio escalated sharply by 40.0% from 0.7 to 0.98.",
+          "positive_indicators": "## Positive Financial Indicators\n\u2022 Revenue growth of 8.41% year-over-year\n\u2022 Improved operating cash flow (up 10.98%)",
+          "key_financial_insights": "1. Top-line revenue established at \u20b95.8B with growth of +8.41%.\n2. Profitability resulted in net income of \u20b9650M (-4.2%).\n3. Balance sheet leverage indicated by debt-to-equity of 0.98 and total debt of \u20b94.2B.\n4. Isolation Forest and statistical testing highlighted 2 notable variations.",
+          "overall_analytical_assessment": "The available financial data indicates that revenue changed by +8.41% during FY2025, while net profit recorded -4.2%. Leverage stood at 0.98 and liquidity measured 1.45 based on verified ratios. The machine-learning model classified the company as Moderate Risk with 78% confidence based on the supplied financial features.\n\nThis assessment reflects the available financial data and model output and should not be interpreted as professional investment advice."
+        },
+        "full_markdown": "# Executive Summary\nKey corporate performance overview for executive leadership. For TechCorp Solutions Ltd., consolidated revenue increased by 8.41% during FY2025, reaching \u20b95.8B. Net profit declined by 4.2%, totaling \u20b9650M. Debt-to-equity shifted from 0.7 to 0.98. The ML model classified the financial condition as Moderate Risk with 78% confidence. Key attention areas include leverage adjustments and profit margins.\n\n# Financial Performance\nRevenue: \u20b95.8B (YoY Change: +8.41%)\nNet Income: \u20b9650M (YoY Change: -4.2%)\nTotal Assets: \u20b99.6B\nTotal Debt: \u20b94.2B\nOperating Cash Flow: \u20b9910M\n\nInterpretation: During FY2025, top-line revenue moved by +8.41% compared to FY2024, while bottom-line net profit registered a movement of -4.2%.\n\n# Profitability\nNet profit margin was recorded at 11.21% during FY2025. Return on Equity (ROE) stood at 15.12%, and Return on Assets (ROA) was 6.81%. Operating margins reflect verified accounting line items.\n\n# Liquidity\nThe current ratio stood at 1.45 in FY2025 compared to 1.62 in FY2024. Interpretation: Liquidity decreased. Quick ratio was 1.09.\n\n# Solvency\nDebt-to-equity ratio reached 0.98 against 0.7 in the prior period. Interpretation: Leverage increased. Total debt obligations are reported at \u20b94.2B.\n\n# Efficiency\nAsset utilization and balance sheet capacity are grounded in total reported assets of \u20b99.6B supporting revenue generation of \u20b95.8B.\n\n# Growth\nAnnual top-line expansion was +8.41%. Operating cash generation stood at \u20b9910M.\n\n# Risk Analysis\nML RISK ASSESSMENT\nPrediction: Moderate Risk\nProbability: 78%\nPrimary indicators:\n\u2022 Debt-to-equity increased\n\u2022 Profit growth declined\n\u2022 Current ratio decreased\n\n# Anomalies\nANOMALY DETECTED\nMetric: Total Debt\nPeriod: FY2025\nPrevious: \u20b93B\nCurrent: \u20b94.2B\nChange: 40.0%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: The report shows a substantial expansion of 40.0% in reported total debt compared with the previous period (\u20b93B in FY2024 to \u20b94.2B in FY2025).\n\nANOMALY DETECTED\nMetric: Debt-to-Equity Leverage\nPeriod: FY2025\nPrevious: 0.7\nCurrent: 0.98\nChange: 40.0%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: Leverage ratio escalated sharply by 40.0% from 0.7 to 0.98.\n\n## Positive Financial Indicators\n\u2022 Revenue growth of 8.41% year-over-year\n\u2022 Improved operating cash flow (up 10.98%)\n\n# Key Financial Insights\n1. Top-line revenue established at \u20b95.8B with growth of +8.41%.\n2. Profitability resulted in net income of \u20b9650M (-4.2%).\n3. Balance sheet leverage indicated by debt-to-equity of 0.98 and total debt of \u20b94.2B.\n4. Isolation Forest and statistical testing highlighted 2 notable variations.\n\n# Overall Analytical Assessment\nThe available financial data indicates that revenue changed by +8.41% during FY2025, while net profit recorded -4.2%. Leverage stood at 0.98 and liquidity measured 1.45 based on verified ratios. The machine-learning model classified the company as Moderate Risk with 78% confidence based on the supplied financial features.\n\nThis assessment reflects the available financial data and model output and should not be interpreted as professional investment advice."
       }
     ],
-    "last_updated": "2026-09-25T10:48:55.237490"
+    "last_updated": "2026-11-15T15:36:25.710795"
   },
   "apex_global_retail_ltd._fy2025": {
     "report_id": "apex_global_retail_ltd._fy2025",
@@ -835,8 +1050,22 @@
       ],
       "risk_prediction": {
         "class": "High Risk",
-        "probability": 100.0,
-        "probability_formatted": "100%",
+        "probability": 99.8,
+        "probability_formatted": "99%",
+        "risk_meter_score": 95.0,
+        "model_type": "Multi-Model Voting Ensemble (Gradient Boosting + Random Forest + Logistic Regression)",
+        "class_probabilities": {
+          "low_risk": 0.1,
+          "moderate_risk": 0.1,
+          "high_risk": 99.8
+        },
+        "primary_risk_drivers": [
+          "Debt-to-equity increased",
+          "Profit growth declined",
+          "Current ratio below 1.0 (sub-unit liquidity)",
+          "Revenue contracted",
+          "Negative operating cash flow"
+        ],
         "primary_indicators": [
           "Debt-to-equity increased",
           "Profit growth declined",
@@ -844,7 +1073,114 @@
           "Revenue contracted",
           "Negative operating cash flow"
         ],
-        "positive_indicators": []
+        "positive_indicators": [],
+        "altman_z_score": {
+          "score": -3.9,
+          "zone": "Distress Zone",
+          "description": "Elevated risk of insolvency and covenant stress within 12-24 months.",
+          "badge_color": "rose",
+          "thresholds": {
+            "safe": "> 2.60",
+            "grey": "1.10 \u2013 2.60",
+            "distress": "< 1.10"
+          }
+        },
+        "piotroski_f_score": {
+          "score": 2,
+          "max_score": 9,
+          "rating": "Weak Financial Health",
+          "strength": "Low",
+          "passed_checks_count": 2,
+          "checks": [
+            {
+              "name": "Positive Net Income",
+              "passed": false,
+              "category": "Profitability"
+            },
+            {
+              "name": "Positive Return on Assets",
+              "passed": false,
+              "category": "Profitability"
+            },
+            {
+              "name": "Positive Operating Cash Flow",
+              "passed": false,
+              "category": "Cash Quality"
+            },
+            {
+              "name": "Operating Cash Flow exceeds Net Income",
+              "passed": true,
+              "category": "Cash Quality"
+            },
+            {
+              "name": "Liquidity (Current Ratio) Preserved/Improved",
+              "passed": false,
+              "category": "Liquidity"
+            },
+            {
+              "name": "Leverage Managed (D/E not expanding)",
+              "passed": false,
+              "category": "Leverage"
+            },
+            {
+              "name": "No Dilutive Equity Issuance",
+              "passed": true,
+              "category": "Capital Structure"
+            },
+            {
+              "name": "Margin Expansion (NPM stable/improving)",
+              "passed": false,
+              "category": "Efficiency"
+            },
+            {
+              "name": "Top-Line Revenue Expansion",
+              "passed": false,
+              "category": "Efficiency"
+            }
+          ]
+        },
+        "feature_attributions": {
+          "Capital Structure & Leverage (D/E)": 32.5,
+          "Liquidity & Coverage (Current & Quick)": 26.0,
+          "Operating Margin & Returns (NPM & ROE)": 21.5,
+          "Cash Flow & Debt Service (OCF)": 14.0,
+          "Top-Line Expansion Velocity (CAGR)": 6.0
+        },
+        "model_consensus": [
+          {
+            "name": "Gradient Boosting Classifier",
+            "architecture": "Sequential Loss-Minimized Tree Boosting",
+            "vote": "High Risk",
+            "confidence": "99%"
+          },
+          {
+            "name": "Random Forest Classifier",
+            "architecture": "Bootstrap Aggregated Decision Forest (50 Trees)",
+            "vote": "High Risk",
+            "confidence": "100%"
+          },
+          {
+            "name": "Calibrated Logistic Regression",
+            "architecture": "Regularized L2 Linear Decision Boundary",
+            "vote": "High Risk",
+            "confidence": "100%"
+          },
+          {
+            "name": "Altman Z''-Score Econometric Engine",
+            "architecture": "Multivariate Credit Scoring (NYU Stern Formulation)",
+            "vote": "Distress Zone",
+            "confidence": "Z'' = -3.9"
+          }
+        ],
+        "feature_inputs": {
+          "current_ratio": 0.64,
+          "quick_ratio": 0.48,
+          "debt_to_equity": 11.03,
+          "net_profit_margin_pct": -16.43,
+          "roe_pct": -270.59,
+          "revenue_growth_pct": -31.7,
+          "ocf_positive": false
+        }
       },
       "positive_indicators": [
         "No significant positive indicators were identified from the available data."
@@ -900,13 +1236,13 @@
       {
         "version_num": 1,
         "version_label": "Summary v1",
-        "created_at": "2026-09-25T10:19:57.804022",
-        "created_at_formatted": "25 Sep 2026, 10:19 AM",
+        "created_at": "2026-11-15T15:36:26.225260",
+        "created_at_formatted": "15 Nov 2026, 03:36 PM",
         "length": "Standard",
         "tone": "Academic",
-        "source": "Gemini (gemini-3.5-flash-lite)",
-        "model": "gemini-3.5-flash-lite",
-        "is_fallback": false,
+        "source": "Python Deterministic Fallback Engine",
+        "model": "Deterministic Rule-Based (Python)",
+        "is_fallback": true,
         "validation": {
           "is_valid": true,
           "checks": [
@@ -914,73 +1250,87 @@
               "id": 1,
               "name": "Financial Values Grounding",
               "passed": true,
-              "detail": "Verified key metrics: Revenue (\u20b95.6B), Net Income (\u20b9-920M)"
+              "detail": "Verified key metrics: Revenue (\u20b95.6B), Net Income (\u20b9-920M)",
+              "check_name": "Financial Values Grounding"
             },
             {
               "id": 2,
               "name": "Calculated Ratios Verification",
               "passed": true,
-              "detail": "Verified Current Ratio, Debt-to-Equity, ROE, ROA, Profit Margins match calculated items"
+              "detail": "Verified Current Ratio, Debt-to-Equity, ROE, ROA, Profit Margins match calculated items",
+              "check_name": "Calculated Ratios Verification"
             },
             {
               "id": 3,
               "name": "ML Risk Classification Fidelity",
               "passed": true,
-              "detail": "ML Risk classification correctly states 'High Risk'"
+              "detail": "ML Risk classification correctly states 'High Risk'",
+              "check_name": "ML Risk Classification Fidelity"
             },
             {
               "id": 4,
               "name": "Percentage Changes Consistency",
               "passed": true,
-              "detail": "YoY growth deltas and percentage margins conform to verified calculations"
+              "detail": "YoY growth deltas and percentage margins conform to verified calculations",
+              "check_name": "Percentage Changes Consistency"
             },
             {
               "id": 5,
               "name": "Reporting Period & Year Conformity",
               "passed": true,
-              "detail": "Reporting period FY2025 verified"
+              "detail": "Reporting period FY2025 verified",
+              "check_name": "Reporting Period & Year Conformity"
             },
             {
               "id": 6,
               "name": "Company Entity Grounding",
               "passed": true,
-              "detail": "Grounded to verified company entity 'Apex Global Retail Ltd.'"
+              "detail": "Grounded to verified company entity 'Apex Global Retail Ltd.'",
+              "check_name": "Company Entity Grounding"
             },
             {
               "id": 7,
               "name": "Fact-Grounding (No Invented Causes)",
               "passed": true,
-              "detail": "No unverified or invented causal statements detected"
+              "detail": "No unverified or invented causal statements detected",
+              "check_name": "Fact-Grounding (No Invented Causes)"
             }
           ],
           "errors": [],
-          "score": "7/7 Passed"
+          "score": "7/7 Passed",
+          "accuracy_percentage": 100.0,
+          "hallucination_score": 0.0,
+          "factual_grounding_score": 100.0,
+          "accounting_integrity_score": 100.0,
+          "passed_count": 7,
+          "total_count": 7,
+          "audit_status": "Zero Hallucinations Verified"
         },
         "audit_trail": [
           {
             "attempt": 1,
-            "status": "PASSED",
-            "detail": "AI summary passed all 7 accuracy checks on first generation."
+            "status": "API_UNAVAILABLE",
+            "detail": "GEMINI_API_KEY is not set. Please provide an API key in settings."
           }
         ],
         "sections": {
-          "executive_summary": "For the reporting period FY2025, Apex Global Retail Ltd. experienced severe financial contraction across core operational and structural metrics. Compared to the previous period (FY2024), revenue declined significantly alongside substantial net losses, negative operating cash flows, escalating debt obligations, and depleted equity.",
-          "financial_performance": "Total revenue for FY2025 was recorded at \u20b95.6B (\u20b95,600.0M), marking a year-over-year (YoY) absolute decrease of -\u20b92,600.0M or -31.71% from \u20b98.2B (\u20b98,200.0M) in FY2024. Over the multi-period scope spanning FY2022 to FY2025, revenue demonstrated a fluctuating trend with a CAGR of -8.04%, moving from \u20b97.2B in FY2022 to \u20b97.8B in FY2023, \u20b98.2B in FY2024, and ultimately contracting to \u20b95.6B in FY2025. Total assets decreased by -20.0% YoY to \u20b95.4B (\u20b95,440.0M) in FY2025 from \u20b96.8B (\u20b96,800.0M) in FY2024. Total liabilities increased by 6.25% YoY to \u20b95.1B (\u20b95,100.0M) in FY2025 from \u20b94.8B (\u20b94,800.0M) in FY2024.",
-          "profitability": "Net income for FY2025 registered at -\u20b9920M (-\u20b9920.0M), reflecting a YoY change of -1,462.96% compared to a net income of \u20b967.5M in FY2024. Historical tracking indicates a consistent decline in net income from FY2022 (\u20b9360M) and FY2023 (\u20b9307.5M) to FY2024 and FY2025. Operating income followed a similar downward trajectory, declining consistently from \u20b9700M in FY2022, \u20b9650M in FY2023, and \u20b9400M in FY2024, down to -\u20b9500M (-\u20b9500.0M) in FY2025. Profitability ratios for FY2025 include a net profit margin of -16.43% (a change of -17.25 percentage points), an operating margin of -8.93% (a change of -13.81 percentage points), a Return on Assets (ROA) of -16.91% (a change of -17.9 percentage points), and a Return on Equity (ROE) of -270.59% (a change of -273.97 percentage points).",
-          "liquidity": "Liquidity metrics experienced marked deterioration in FY2025. The current ratio decreased by -40.74% to 0.64 compared to 1.08 in FY2024. Similarly, the quick ratio declined by -40.74% to 0.48 in FY2025 from 0.81 in the prior period. Both ratios indicate sub-unit short-term liquidity positioning for the current reporting period.",
-          "solvency": "Solvency indicators reflect increased financial leverage. Total debt expanded by 20.97% YoY (an absolute increase of \u20b9650.0M) to reach \u20b93.8B (\u20b93,750.0M) in FY2025, up from \u20b93.1B (\u20b93,100.0M) in FY2024, continuing a consistent multi-period increase. Concurrently, equity degraded sharply by -83.0% YoY to \u20b9340M (\u20b9340.0M) in FY2025 from \u20b92B (\u20b92,000.0M) in FY2024. Consequently, the debt-to-equity ratio escalated by 611.61% to reach 11.03 in FY2025, compared to 1.55 in FY2024.",
-          "efficiency": "Data unavailable.",
-          "growth": "Revenue contracted by -31.71% YoY in FY2025, and multi-period revenue tracking shows a net decrease of 22.2% from FY2022 (\u20b97.2B) to FY2025 (\u20b95.6B) with a CAGR of -8.04%. Net income, operating income, and operating cash flows all recorded consistent multi-period declines ending in negative values for FY2025. Total debt demonstrated consistent growth across available reporting periods (FY2024 to FY2025) at a CAGR of 20.97%.",
-          "risk_analysis": "The machine-learning risk prediction model classifies Apex Global Retail Ltd. as \"High Risk\" with a probability of 100%. The primary risk indicators identified are:\n- Debt-to-equity increased\n- Profit growth declined\n- Current ratio below 1.0 (sub-unit liquidity)\n- Revenue contracted\n- Negative operating cash flow\n\nAdditional stated risk factors include total debt growth to \u20b93.8B, net profit contraction to -\u20b9920M, a falling current ratio of 0.64, negative operating cash flow of -\u20b9380M, elevated debt-to-equity leverage of 11.03, net margin contraction to -16.43%, and five significant financial anomalies detected by Isolation Forest.",
-          "anomalies": "Using Isolation Forest combined with statistical thresholds, five high-severity anomalies were detected for FY2025:\n1. **Revenue**: Dropped by -31.71% from \u20b98.2B (FY2024) to \u20b95.6B (FY2025).\n2. **Net Income**: Decreased by -1,462.96% from \u20b967.5M (FY2024) to -\u20b9920M (FY2025).\n3. **Operating Cash Flow**: Declined by -416.67% from \u20b9120M (FY2024) to -\u20b9380M (FY2025).\n4. **Operating Income**: Decreased by -225.0% from \u20b9400M (FY2024) to -\u20b9500M (FY2025).\n5. **Debt-to-Equity Leverage**: Escalated by 611.61% from 1.55 (FY2024) to 11.03 (FY2025).",
-          "positive_indicators": "Data unavailable. No significant positive indicators were identified from the available data.",
-          "key_financial_insights": "- Reported revenue dropped significantly by 31.7% from \u20b98.2B in FY2024 to \u20b95.6B in FY2025.\n- Net profit swung into a substantial loss of -\u20b9920M in FY2025 against a net profit of \u20b967.5M in FY2024.\n- Operating cash flows reversed to negative \u20b9380M during FY2025 compared to positive \u20b9120M in FY2024.\n- Current ratio slipped into sub-unit territory at 0.64, signaling working capital strain.\n- Total debt escalated to \u20b93,750M while equity degraded to \u20b9340M, driving the debt-to-equity ratio to 11.03.",
-          "overall_analytical_assessment": "The financial metrics for FY2025 portray Apex Global Retail Ltd. under severe financial stress. Empirical data demonstrates widespread deterioration, marked by top-line revenue contraction, deep operating and net losses, cash burn evidenced by negative operating cash flows, restricted short-term liquidity with a current ratio below unity, and heightened financial leverage driven by simultaneous debt accumulation and equity erosion. These empirical findings substantiate the high-risk classification assigned by the predictive analytical model."
+          "executive_summary": "Empirical examination of the reported accounting statements reveals the following factual observations. For Apex Global Retail Ltd., consolidated revenue declined by 31.71% during FY2025, reaching \u20b95.6B. Net profit declined by 1462.96%, totaling \u20b9-920M. Debt-to-equity shifted from 1.55 to 11.03. The ML model classified the financial condition as High Risk with 99% confidence. Key attention areas include leverage adjustments and profit margins.",
+          "financial_performance": "Revenue: \u20b95.6B (YoY Change: -31.71%)\nNet Income: \u20b9-920M (YoY Change: -1462.96%)\nTotal Assets: \u20b95.4B\nTotal Debt: \u20b93.8B\nOperating Cash Flow: \u20b9-380M\n\nInterpretation: During FY2025, top-line revenue moved by -31.71% compared to FY2024, while bottom-line net profit registered a movement of -1462.96%.",
+          "profitability": "Net profit margin was recorded at -16.43% during FY2025. Return on Equity (ROE) stood at -270.59%, and Return on Assets (ROA) was -16.91%. Operating margins reflect verified accounting line items.",
+          "liquidity": "The current ratio stood at 0.64 in FY2025 compared to 1.08 in FY2024. Interpretation: Liquidity decreased. Quick ratio was 0.48.",
+          "solvency": "Debt-to-equity ratio reached 11.03 against 1.55 in the prior period. Interpretation: Leverage increased. Total debt obligations are reported at \u20b93.8B.",
+          "efficiency": "Asset utilization and balance sheet capacity are grounded in total reported assets of \u20b95.4B supporting revenue generation of \u20b95.6B.",
+          "growth": "Annual top-line expansion was -31.71%. Operating cash generation stood at \u20b9-380M.",
+          "risk_analysis": "ML RISK ASSESSMENT\nPrediction: High Risk\nProbability: 99%\nPrimary indicators:\n\u2022 Debt-to-equity increased\n\u2022 Profit growth declined\n\u2022 Current ratio below 1.0 (sub-unit liquidity)\n\u2022 Revenue contracted\n\u2022 Negative operating cash flow",
+          "anomalies": "ANOMALY DETECTED\nMetric: Revenue\nPeriod: FY2025\nPrevious: \u20b98.2B\nCurrent: \u20b95.6B\nChange: -31.71%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: The report shows a substantial decrease of 31.71% in reported revenue compared with the previous period (\u20b98.2B in FY2024 to \u20b95.6B in FY2025).\n\nANOMALY DETECTED\nMetric: Net Income\nPeriod: FY2025\nPrevious: \u20b967.5M\nCurrent: \u20b9-920M\nChange: -1462.96%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: The report shows a substantial decrease of 1462.96% in reported net income compared with the previous period (\u20b967.5M in FY2024 to \u20b9-920M in FY2025).\n\nANOMALY DETECTED\nMetric: Operating Cash Flow\nPeriod: FY2025\nPrevious: \u20b9120M\nCurrent: \u20b9-380M\nChange: -416.67%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: The report shows a substantial decrease of 416.67% in reported operating cash flow compared with the previous period (\u20b9120M in FY2024 to \u20b9-380M in FY2025).\n\nANOMALY DETECTED\nMetric: Operating Income\nPeriod: FY2025\nPrevious: \u20b9400M\nCurrent: \u20b9-500M\nChange: -225.0%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: The report shows a substantial decrease of 225.0% in reported operating income compared with the previous period (\u20b9400M in FY2024 to \u20b9-500M in FY2025).\n\nANOMALY DETECTED\nMetric: Debt-to-Equity Leverage\nPeriod: FY2025\nPrevious: 1.55\nCurrent: 11.03\nChange: 611.61%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: Leverage ratio escalated sharply by 611.61% from 1.55 to 11.03.",
+          "positive_indicators": "## Positive Financial Indicators\n\u2022 No significant positive indicators were identified from the available data.",
+          "key_financial_insights": "1. Top-line revenue established at \u20b95.6B with growth of -31.71%.\n2. Profitability resulted in net income of \u20b9-920M (-1462.96%).\n3. Balance sheet leverage indicated by debt-to-equity of 11.03 and total debt of \u20b93.8B.\n4. Isolation Forest and statistical testing highlighted 5 notable variations.",
+          "overall_analytical_assessment": "The available financial data indicates that revenue changed by -31.71% during FY2025, while net profit recorded -1462.96%. Leverage stood at 11.03 and liquidity measured 0.64 based on verified ratios. The machine-learning model classified the company as High Risk with 99% confidence based on the supplied financial features.\n\nThis assessment reflects the available financial data and model output and should not be interpreted as professional investment advice."
         },
-        "full_markdown": "## Executive Summary\nFor the reporting period FY2025, Apex Global Retail Ltd. experienced severe financial contraction across core operational and structural metrics. Compared to the previous period (FY2024), revenue declined significantly alongside substantial net losses, negative operating cash flows, escalating debt obligations, and depleted equity. \n\n## Financial Performance\nTotal revenue for FY2025 was recorded at \u20b95.6B (\u20b95,600.0M), marking a year-over-year (YoY) absolute decrease of -\u20b92,600.0M or -31.71% from \u20b98.2B (\u20b98,200.0M) in FY2024. Over the multi-period scope spanning FY2022 to FY2025, revenue demonstrated a fluctuating trend with a CAGR of -8.04%, moving from \u20b97.2B in FY2022 to \u20b97.8B in FY2023, \u20b98.2B in FY2024, and ultimately contracting to \u20b95.6B in FY2025. Total assets decreased by -20.0% YoY to \u20b95.4B (\u20b95,440.0M) in FY2025 from \u20b96.8B (\u20b96,800.0M) in FY2024. Total liabilities increased by 6.25% YoY to \u20b95.1B (\u20b95,100.0M) in FY2025 from \u20b94.8B (\u20b94,800.0M) in FY2024.\n\n## Profitability\nNet income for FY2025 registered at -\u20b9920M (-\u20b9920.0M), reflecting a YoY change of -1,462.96% compared to a net income of \u20b967.5M in FY2024. Historical tracking indicates a consistent decline in net income from FY2022 (\u20b9360M) and FY2023 (\u20b9307.5M) to FY2024 and FY2025. Operating income followed a similar downward trajectory, declining consistently from \u20b9700M in FY2022, \u20b9650M in FY2023, and \u20b9400M in FY2024, down to -\u20b9500M (-\u20b9500.0M) in FY2025. Profitability ratios for FY2025 include a net profit margin of -16.43% (a change of -17.25 percentage points), an operating margin of -8.93% (a change of -13.81 percentage points), a Return on Assets (ROA) of -16.91% (a change of -17.9 percentage points), and a Return on Equity (ROE) of -270.59% (a change of -273.97 percentage points).\n\n## Liquidity\nLiquidity metrics experienced marked deterioration in FY2025. The current ratio decreased by -40.74% to 0.64 compared to 1.08 in FY2024. Similarly, the quick ratio declined by -40.74% to 0.48 in FY2025 from 0.81 in the prior period. Both ratios indicate sub-unit short-term liquidity positioning for the current reporting period.\n\n## Solvency\nSolvency indicators reflect increased financial leverage. Total debt expanded by 20.97% YoY (an absolute increase of \u20b9650.0M) to reach \u20b93.8B (\u20b93,750.0M) in FY2025, up from \u20b93.1B (\u20b93,100.0M) in FY2024, continuing a consistent multi-period increase. Concurrently, equity degraded sharply by -83.0% YoY to \u20b9340M (\u20b9340.0M) in FY2025 from \u20b92B (\u20b92,000.0M) in FY2024. Consequently, the debt-to-equity ratio escalated by 611.61% to reach 11.03 in FY2025, compared to 1.55 in FY2024.\n\n## Efficiency\nData unavailable.\n\n## Growth\nRevenue contracted by -31.71% YoY in FY2025, and multi-period revenue tracking shows a net decrease of 22.2% from FY2022 (\u20b97.2B) to FY2025 (\u20b95.6B) with a CAGR of -8.04%. Net income, operating income, and operating cash flows all recorded consistent multi-period declines ending in negative values for FY2025. Total debt demonstrated consistent growth across available reporting periods (FY2024 to FY2025) at a CAGR of 20.97%.\n\n## Risk Analysis\nThe machine-learning risk prediction model classifies Apex Global Retail Ltd. as \"High Risk\" with a probability of 100%. The primary risk indicators identified are:\n- Debt-to-equity increased\n- Profit growth declined\n- Current ratio below 1.0 (sub-unit liquidity)\n- Revenue contracted\n- Negative operating cash flow\n\nAdditional stated risk factors include total debt growth to \u20b93.8B, net profit contraction to -\u20b9920M, a falling current ratio of 0.64, negative operating cash flow of -\u20b9380M, elevated debt-to-equity leverage of 11.03, net margin contraction to -16.43%, and five significant financial anomalies detected by Isolation Forest.\n\n## Anomalies\nUsing Isolation Forest combined with statistical thresholds, five high-severity anomalies were detected for FY2025:\n1. **Revenue**: Dropped by -31.71% from \u20b98.2B (FY2024) to \u20b95.6B (FY2025).\n2. **Net Income**: Decreased by -1,462.96% from \u20b967.5M (FY2024) to -\u20b9920M (FY2025).\n3. **Operating Cash Flow**: Declined by -416.67% from \u20b9120M (FY2024) to -\u20b9380M (FY2025).\n4. **Operating Income**: Decreased by -225.0% from \u20b9400M (FY2024) to -\u20b9500M (FY2025).\n5. **Debt-to-Equity Leverage**: Escalated by 611.61% from 1.55 (FY2024) to 11.03 (FY2025).\n\n## Positive Indicators\nData unavailable. No significant positive indicators were identified from the available data.\n\n## Key Financial Insights\n- Reported revenue dropped significantly by 31.7% from \u20b98.2B in FY2024 to \u20b95.6B in FY2025.\n- Net profit swung into a substantial loss of -\u20b9920M in FY2025 against a net profit of \u20b967.5M in FY2024.\n- Operating cash flows reversed to negative \u20b9380M during FY2025 compared to positive \u20b9120M in FY2024.\n- Current ratio slipped into sub-unit territory at 0.64, signaling working capital strain.\n- Total debt escalated to \u20b93,750M while equity degraded to \u20b9340M, driving the debt-to-equity ratio to 11.03.\n\n## Overall Analytical Assessment\nThe financial metrics for FY2025 portray Apex Global Retail Ltd. under severe financial stress. Empirical data demonstrates widespread deterioration, marked by top-line revenue contraction, deep operating and net losses, cash burn evidenced by negative operating cash flows, restricted short-term liquidity with a current ratio below unity, and heightened financial leverage driven by simultaneous debt accumulation and equity erosion. These empirical findings substantiate the high-risk classification assigned by the predictive analytical model."
+        "full_markdown": "# Executive Summary\nEmpirical examination of the reported accounting statements reveals the following factual observations. For Apex Global Retail Ltd., consolidated revenue declined by 31.71% during FY2025, reaching \u20b95.6B. Net profit declined by 1462.96%, totaling \u20b9-920M. Debt-to-equity shifted from 1.55 to 11.03. The ML model classified the financial condition as High Risk with 99% confidence. Key attention areas include leverage adjustments and profit margins.\n\n# Financial Performance\nRevenue: \u20b95.6B (YoY Change: -31.71%)\nNet Income: \u20b9-920M (YoY Change: -1462.96%)\nTotal Assets: \u20b95.4B\nTotal Debt: \u20b93.8B\nOperating Cash Flow: \u20b9-380M\n\nInterpretation: During FY2025, top-line revenue moved by -31.71% compared to FY2024, while bottom-line net profit registered a movement of -1462.96%.\n\n# Profitability\nNet profit margin was recorded at -16.43% during FY2025. Return on Equity (ROE) stood at -270.59%, and Return on Assets (ROA) was -16.91%. Operating margins reflect verified accounting line items.\n\n# Liquidity\nThe current ratio stood at 0.64 in FY2025 compared to 1.08 in FY2024. Interpretation: Liquidity decreased. Quick ratio was 0.48.\n\n# Solvency\nDebt-to-equity ratio reached 11.03 against 1.55 in the prior period. Interpretation: Leverage increased. Total debt obligations are reported at \u20b93.8B.\n\n# Risk Analysis\nML RISK ASSESSMENT\nPrediction: High Risk\nProbability: 99%\nPrimary indicators:\n\u2022 Debt-to-equity increased\n\u2022 Profit growth declined\n\u2022 Current ratio below 1.0 (sub-unit liquidity)\n\u2022 Revenue contracted\n\u2022 Negative operating cash flow\n\n# Anomalies\nANOMALY DETECTED\nMetric: Revenue\nPeriod: FY2025\nPrevious: \u20b98.2B\nCurrent: \u20b95.6B\nChange: -31.71%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: The report shows a substantial decrease of 31.71% in reported revenue compared with the previous period (\u20b98.2B in FY2024 to \u20b95.6B in FY2025).\n\nANOMALY DETECTED\nMetric: Net Income\nPeriod: FY2025\nPrevious: \u20b967.5M\nCurrent: \u20b9-920M\nChange: -1462.96%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: The report shows a substantial decrease of 1462.96% in reported net income compared with the previous period (\u20b967.5M in FY2024 to \u20b9-920M in FY2025).\n\nANOMALY DETECTED\nMetric: Operating Cash Flow\nPeriod: FY2025\nPrevious: \u20b9120M\nCurrent: \u20b9-380M\nChange: -416.67%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: The report shows a substantial decrease of 416.67% in reported operating cash flow compared with the previous period (\u20b9120M in FY2024 to \u20b9-380M in FY2025).\n\nANOMALY DETECTED\nMetric: Operating Income\nPeriod: FY2025\nPrevious: \u20b9400M\nCurrent: \u20b9-500M\nChange: -225.0%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: The report shows a substantial decrease of 225.0% in reported operating income compared with the previous period (\u20b9400M in FY2024 to \u20b9-500M in FY2025).\n\nANOMALY DETECTED\nMetric: Debt-to-Equity Leverage\nPeriod: FY2025\nPrevious: 1.55\nCurrent: 11.03\nChange: 611.61%\nDetection: Isolation Forest + statistical threshold\nContextual interpretation: Leverage ratio escalated sharply by 611.61% from 1.55 to 11.03.\n\n## Positive Financial Indicators\n\u2022 No significant positive indicators were identified from the available data.\n\n# Key Financial Insights\n1. Top-line revenue established at \u20b95.6B with growth of -31.71%.\n2. Profitability resulted in net income of \u20b9-920M (-1462.96%).\n3. Balance sheet leverage indicated by debt-to-equity of 11.03 and total debt of \u20b93.8B.\n4. Isolation Forest and statistical testing highlighted 5 notable variations.\n\n# Overall Analytical Assessment\nThe available financial data indicates that revenue changed by -31.71% during FY2025, while net profit recorded -1462.96%. Leverage stood at 11.03 and liquidity measured 0.64 based on verified ratios. The machine-learning model classified the company as High Risk with 99% confidence based on the supplied financial features.\n\nThis assessment reflects the available financial data and model output and should not be interpreted as professional investment advice."
       }
     ],
-    "last_updated": "2026-09-25T10:19:57.804022"
+    "last_updated": "2026-11-15T15:36:26.225260"
   },
   "reliance_industries_limited_fy2025": {
     "report_id": "reliance_industries_limited_fy2025",
@@ -1715,8 +2065,16 @@
       "anomalies": [],
       "risk_prediction": {
         "class": "Low Risk",
-        "probability": 83.3,
-        "probability_formatted": "83%",
+        "probability": 91.3,
+        "probability_formatted": "91%",
+        "risk_meter_score": 13.5,
+        "model_type": "Multi-Model Voting Ensemble (Gradient Boosting + Random Forest + Logistic Regression)",
+        "class_probabilities": {
+          "low_risk": 91.3,
+          "moderate_risk": 6.8,
+          "high_risk": 2.0
+        },
+        "primary_risk_drivers": [],
         "primary_indicators": [],
         "positive_indicators": [
           "Conservative leverage (low debt-to-equity)",
@@ -1725,7 +2083,114 @@
           "Operating cash flow improved",
           "Improved ROA",
           "Improved ROE"
-        ]
+        ],
+        "altman_z_score": {
+          "score": 16.49,
+          "zone": "Safe Zone",
+          "description": "Negligible risk of short-to-medium term financial distress or insolvency.",
+          "badge_color": "emerald",
+          "thresholds": {
+            "safe": "> 2.60",
+            "grey": "1.10 \u2013 2.60",
+            "distress": "< 1.10"
+          }
+        },
+        "piotroski_f_score": {
+          "score": 9,
+          "max_score": 9,
+          "rating": "Strong Fundamentals",
+          "strength": "High",
+          "passed_checks_count": 9,
+          "checks": [
+            {
+              "name": "Positive Net Income",
+              "passed": true,
+              "category": "Profitability"
+            },
+            {
+              "name": "Positive Return on Assets",
+              "passed": true,
+              "category": "Profitability"
+            },
+            {
+              "name": "Positive Operating Cash Flow",
+              "passed": true,
+              "category": "Cash Quality"
+            },
+            {
+              "name": "Operating Cash Flow exceeds Net Income",
+              "passed": true,
+              "category": "Cash Quality"
+            },
+            {
+              "name": "Liquidity (Current Ratio) Preserved/Improved",
+              "passed": true,
+              "category": "Liquidity"
+            },
+            {
+              "name": "Leverage Managed (D/E not expanding)",
+              "passed": true,
+              "category": "Leverage"
+            },
+            {
+              "name": "No Dilutive Equity Issuance",
+              "passed": true,
+              "category": "Capital Structure"
+            },
+            {
+              "name": "Margin Expansion (NPM stable/improving)",
+              "passed": true,
+              "category": "Efficiency"
+            },
+            {
+              "name": "Top-Line Revenue Expansion",
+              "passed": true,
+              "category": "Efficiency"
+            }
+          ]
+        },
+        "feature_attributions": {
+          "Capital Structure & Leverage (D/E)": 32.5,
+          "Liquidity & Coverage (Current & Quick)": 26.0,
+          "Operating Margin & Returns (NPM & ROE)": 21.5,
+          "Cash Flow & Debt Service (OCF)": 14.0,
+          "Top-Line Expansion Velocity (CAGR)": 6.0
+        },
+        "model_consensus": [
+          {
+            "name": "Gradient Boosting Classifier",
+            "architecture": "Sequential Loss-Minimized Tree Boosting",
+            "vote": "Low Risk",
+            "confidence": "99%"
+          },
+          {
+            "name": "Random Forest Classifier",
+            "architecture": "Bootstrap Aggregated Decision Forest (50 Trees)",
+            "vote": "Low Risk",
+            "confidence": "86%"
+          },
+          {
+            "name": "Calibrated Logistic Regression",
+            "architecture": "Regularized L2 Linear Decision Boundary",
+            "vote": "Low Risk",
+            "confidence": "85%"
+          },
+          {
+            "name": "Altman Z''-Score Econometric Engine",
+            "architecture": "Multivariate Credit Scoring (NYU Stern Formulation)",
+            "vote": "Safe Zone",
+            "confidence": "Z'' = 16.49"
+          }
+        ],
+        "feature_inputs": {
+          "current_ratio": 8.1,
+          "quick_ratio": 6.08,
+          "debt_to_equity": 0.15,
+          "net_profit_margin_pct": 8.0,
+          "roe_pct": 6.33,
+          "revenue_growth_pct": 7.5,
+          "ocf_positive": true
+        }
       },
       "positive_indicators": [
         "Revenue growth of 7.53% year-over-year",
@@ -1773,13 +2238,13 @@
       {
         "version_num": 1,
         "version_label": "Summary v1",
-        "created_at": "2026-09-25T10:20:01.508930",
-        "created_at_formatted": "25 Sep 2026, 10:20 AM",
+        "created_at": "2026-11-15T15:36:26.701388",
+        "created_at_formatted": "15 Nov 2026, 03:36 PM",
         "length": "Short",
         "tone": "Executive",
-        "source": "Gemini (gemini-3.5-flash-lite)",
-        "model": "gemini-3.5-flash-lite",
-        "is_fallback": false,
+        "source": "Python Deterministic Fallback Engine",
+        "model": "Deterministic Rule-Based (Python)",
+        "is_fallback": true,
         "validation": {
           "is_valid": true,
           "checks": [
@@ -1787,73 +2252,87 @@
               "id": 1,
               "name": "Financial Values Grounding",
               "passed": true,
-              "detail": "Verified key metrics: Revenue ($96B), Net Income ($7.7B)"
+              "detail": "Verified key metrics: Revenue ($96B), Net Income ($7.7B)",
+              "check_name": "Financial Values Grounding"
             },
             {
               "id": 2,
               "name": "Calculated Ratios Verification",
               "passed": true,
-              "detail": "Verified Current Ratio, Debt-to-Equity, ROE, ROA, Profit Margins match calculated items"
+              "detail": "Verified Current Ratio, Debt-to-Equity, ROE, ROA, Profit Margins match calculated items",
+              "check_name": "Calculated Ratios Verification"
             },
             {
               "id": 3,
               "name": "ML Risk Classification Fidelity",
               "passed": true,
-              "detail": "ML Risk classification correctly states 'Low Risk'"
+              "detail": "ML Risk classification correctly states 'Low Risk'",
+              "check_name": "ML Risk Classification Fidelity"
             },
             {
               "id": 4,
               "name": "Percentage Changes Consistency",
               "passed": true,
-              "detail": "YoY growth deltas and percentage margins conform to verified calculations"
+              "detail": "YoY growth deltas and percentage margins conform to verified calculations",
+              "check_name": "Percentage Changes Consistency"
             },
             {
               "id": 5,
               "name": "Reporting Period & Year Conformity",
               "passed": true,
-              "detail": "Reporting period FY2025 verified"
+              "detail": "Reporting period FY2025 verified",
+              "check_name": "Reporting Period & Year Conformity"
             },
             {
               "id": 6,
               "name": "Company Entity Grounding",
               "passed": true,
-              "detail": "Grounded to verified company entity 'Tesla Motors, Inc.'"
+              "detail": "Grounded to verified company entity 'Tesla Motors, Inc.'",
+              "check_name": "Company Entity Grounding"
             },
             {
               "id": 7,
               "name": "Fact-Grounding (No Invented Causes)",
               "passed": true,
-              "detail": "No unverified or invented causal statements detected"
+              "detail": "No unverified or invented causal statements detected",
+              "check_name": "Fact-Grounding (No Invented Causes)"
             }
           ],
           "errors": [],
-          "score": "7/7 Passed"
+          "score": "7/7 Passed",
+          "accuracy_percentage": 100.0,
+          "hallucination_score": 0.0,
+          "factual_grounding_score": 100.0,
+          "accounting_integrity_score": 100.0,
+          "passed_count": 7,
+          "total_count": 7,
+          "audit_status": "Zero Hallucinations Verified"
         },
         "audit_trail": [
           {
             "attempt": 1,
-            "status": "PASSED",
-            "detail": "AI summary passed all 7 accuracy checks on first generation."
+            "status": "API_UNAVAILABLE",
+            "detail": "GEMINI_API_KEY is not set. Please provide an API key in settings."
           }
         ],
         "sections": {
-          "executive_summary": "For FY2025, Tesla Motors, Inc. reported revenue of $96B and net income of $7.7B.",
-          "financial_performance": "Revenue reached $96B compared to $89.3B in FY2024, representing a year-over-year increase of 7.53%. Net income was $7.7B, up 10.85% from $6.9B in FY2024. Operating cash flow rose 13.51% to $9.8B.",
-          "profitability": "Net profit margin expanded to 8.0% (+0.2 pp). Return on Equity (ROE) reached 6.3% (+0.1 pp), and Return on Assets (ROA) increased to 5.1% (+0.1 pp). The operating margin remained steady at 10.0%.",
-          "liquidity": "The current ratio was maintained at 8.10, while the quick ratio strengthened slightly to 6.08.",
-          "solvency": "The Debt-to-Equity ratio remained unchanged at 0.15. Total debt increased by 9.61% to $18.2B in FY2025.",
-          "efficiency": "Data unavailable.",
-          "growth": "Revenue, net income, and operating income demonstrated consistent increases from FY2022 to FY2025. Total debt and operating cash flow showed consistent increases from FY2024 to FY2025.",
-          "risk_analysis": "Risk indicators noted increasing debt, with total debt growing by 9.61% to $18.2B.",
-          "anomalies": "Data unavailable.",
-          "positive_indicators": "Positive indicators include revenue growth (7.53%), net profit improvement (10.85%), improved ROA, improved ROE, and improved operating cash flow (up 13.51%).",
-          "key_financial_insights": "Key insights comprise conservative leverage, profit improvement, revenue increases, and improved asset and equity returns.",
-          "overall_analytical_assessment": "The machine-learning prediction classifies the company as Low Risk with an 83% probability, supported by conservative leverage and positive operational indicators."
+          "executive_summary": "Key corporate performance overview for executive leadership. For Tesla Motors, Inc., consolidated revenue increased by 7.53% during FY2025, reaching $96B. Net profit improved by 10.85%, totaling $7.7B. Debt-to-equity shifted from 0.15 to 0.15. The ML model classified the financial condition as Low Risk with 91% confidence. Key attention areas include leverage adjustments and profit margins.",
+          "financial_performance": "Revenue: $96B (YoY Change: +7.53%)\nNet Income: $7.7B (YoY Change: +10.85%)\nTotal Assets: $151.7B\nTotal Debt: $18.2B\nOperating Cash Flow: $9.8B\n\nInterpretation: During FY2025, top-line revenue moved by +7.53% compared to FY2024, while bottom-line net profit registered a movement of +10.85%.",
+          "profitability": "Net profit margin was recorded at 8.0% during FY2025. Return on Equity (ROE) stood at 6.33%, and Return on Assets (ROA) was 5.06%. Operating margins reflect verified accounting line items.",
+          "liquidity": "The current ratio stood at 8.1 in FY2025 compared to 8.1 in FY2024. Interpretation: Liquidity maintained. Quick ratio was 6.08.",
+          "solvency": "Debt-to-equity ratio reached 0.15 against 0.15 in the prior period. Interpretation: Leverage unchanged. Total debt obligations are reported at $18.2B.",
+          "efficiency": "Asset utilization and balance sheet capacity are grounded in total reported assets of $151.7B supporting revenue generation of $96B.",
+          "growth": "Annual top-line expansion was +7.53%. Operating cash generation stood at $9.8B.",
+          "risk_analysis": "ML RISK ASSESSMENT\nPrediction: Low Risk\nProbability: 91%\nPrimary indicators:\n",
+          "anomalies": "No statistical or Isolation Forest anomalies detected across examined financial line items.",
+          "positive_indicators": "## Positive Financial Indicators\n\u2022 Revenue growth of 7.53% year-over-year\n\u2022 Net profit improvement of 10.85%\n\u2022 Improved ROA (increased by 0.05 pp)\n\u2022 Improved ROE (increased by 0.07 pp)\n\u2022 Improved operating cash flow (up 13.51%)",
+          "key_financial_insights": "1. Top-line revenue established at $96B with growth of +7.53%.\n2. Profitability resulted in net income of $7.7B (+10.85%).\n3. Balance sheet leverage indicated by debt-to-equity of 0.15 and total debt of $18.2B.\n4. Isolation Forest and statistical testing highlighted 0 notable variations.",
+          "overall_analytical_assessment": "The available financial data indicates that revenue changed by +7.53% during FY2025, while net profit recorded +10.85%. Leverage stood at 0.15 and liquidity measured 8.1 based on verified ratios. The machine-learning model classified the company as Low Risk with 91% confidence based on the supplied financial features.\n\nThis assessment reflects the available financial data and model output and should not be interpreted as professional investment advice."
         },
-        "full_markdown": "## Executive Summary\nFor FY2025, Tesla Motors, Inc. reported revenue of $96B and net income of $7.7B. \n\n## Financial Performance\nRevenue reached $96B compared to $89.3B in FY2024, representing a year-over-year increase of 7.53%. Net income was $7.7B, up 10.85% from $6.9B in FY2024. Operating cash flow rose 13.51% to $9.8B.\n\n## Profitability\nNet profit margin expanded to 8.0% (+0.2 pp). Return on Equity (ROE) reached 6.3% (+0.1 pp), and Return on Assets (ROA) increased to 5.1% (+0.1 pp). The operating margin remained steady at 10.0%.\n\n## Liquidity\nThe current ratio was maintained at 8.10, while the quick ratio strengthened slightly to 6.08.\n\n## Solvency\nThe Debt-to-Equity ratio remained unchanged at 0.15. Total debt increased by 9.61% to $18.2B in FY2025.\n\n## Efficiency\nData unavailable.\n\n## Growth\nRevenue, net income, and operating income demonstrated consistent increases from FY2022 to FY2025. Total debt and operating cash flow showed consistent increases from FY2024 to FY2025.\n\n## Risk Analysis\nRisk indicators noted increasing debt, with total debt growing by 9.61% to $18.2B.\n\n## Anomalies\nData unavailable.\n\n## Positive Indicators\nPositive indicators include revenue growth (7.53%), net profit improvement (10.85%), improved ROA, improved ROE, and improved operating cash flow (up 13.51%).\n\n## Key Financial Insights\nKey insights comprise conservative leverage, profit improvement, revenue increases, and improved asset and equity returns.\n\n## Overall Analytical Assessment\nThe machine-learning prediction classifies the company as Low Risk with an 83% probability, supported by conservative leverage and positive operational indicators."
+        "full_markdown": "# Executive Summary\nKey corporate performance overview for executive leadership. For Tesla Motors, Inc., consolidated revenue increased by 7.53% during FY2025, reaching $96B. Net profit improved by 10.85%, totaling $7.7B. Debt-to-equity shifted from 0.15 to 0.15. The ML model classified the financial condition as Low Risk with 91% confidence. Key attention areas include leverage adjustments and profit margins.\n\n# Financial Performance\nRevenue: $96B (YoY Change: +7.53%)\nNet Income: $7.7B (YoY Change: +10.85%)\nTotal Assets: $151.7B\nTotal Debt: $18.2B\nOperating Cash Flow: $9.8B\n\nInterpretation: During FY2025, top-line revenue moved by +7.53% compared to FY2024, while bottom-line net profit registered a movement of +10.85%.\n\n# Risk Analysis\nML RISK ASSESSMENT\nPrediction: Low Risk\nProbability: 91%\nPrimary indicators:\n\n\n# Overall Analytical Assessment\nThe available financial data indicates that revenue changed by +7.53% during FY2025, while net profit recorded +10.85%. Leverage stood at 0.15 and liquidity measured 8.1 based on verified ratios. The machine-learning model classified the company as Low Risk with 91% confidence based on the supplied financial features.\n\nThis assessment reflects the available financial data and model output and should not be interpreted as professional investment advice."
       }
     ],
-    "last_updated": "2026-09-25T10:20:01.514798"
+    "last_updated": "2026-11-15T15:36:26.701388"
   },
   "apple_inc._fy2025": {
     "report_id": "apple_inc._fy2025",
