@@ -1,0 +1,108 @@
+{
+  "company_name": "Reliance Industries Limited",
+  "reporting_period": "FY2025",
+  "currency": "₹",
+  "unit": "Billions",
+  "industry": "Energy, Telecom & Retail Conglomerate",
+  "financial_statements": {
+    "income_statement": {
+      "FY2022": {
+        "revenue": 7927.0,
+        "cogs": 4820.0,
+        "gross_profit": 3107.0,
+        "operating_expenses": 1750.0,
+        "operating_income": 1357.0,
+        "interest_expense": 145.0,
+        "tax_expense": 310.0,
+        "net_income": 678.0
+      },
+      "FY2023": {
+        "revenue": 8929.0,
+        "cogs": 5410.0,
+        "gross_profit": 3519.0,
+        "operating_expenses": 1980.0,
+        "operating_income": 1539.0,
+        "interest_expense": 195.0,
+        "tax_expense": 350.0,
+        "net_income": 736.0
+      },
+      "FY2024": {
+        "revenue": 10001.0,
+        "cogs": 6050.0,
+        "gross_profit": 3951.0,
+        "operating_expenses": 2180.0,
+        "operating_income": 1771.0,
+        "interest_expense": 230.0,
+        "tax_expense": 390.0,
+        "net_income": 790.0
+      },
+      "FY2025": {
+        "revenue": 10850.0,
+        "cogs": 6480.0,
+        "gross_profit": 4370.0,
+        "operating_expenses": 2390.0,
+        "operating_income": 1980.0,
+        "interest_expense": 250.0,
+        "tax_expense": 440.0,
+        "net_income": 845.0
+      }
+    },
+    "balance_sheet": {
+      "FY2024": {
+        "cash_and_equivalents": 1850.0,
+        "accounts_receivable": 890.0,
+        "inventory": 1350.0,
+        "current_assets": 4650.0,
+        "property_plant_equipment": 9800.0,
+        "intangible_assets": 1950.0,
+        "total_assets": 16400.0,
+        "current_liabilities": 3400.0,
+        "short_term_debt": 850.0,
+        "long_term_debt": 2750.0,
+        "total_debt": 3600.0,
+        "total_liabilities": 8200.0,
+        "shareholders_equity": 8200.0
+      },
+      "FY2025": {
+        "cash_and_equivalents": 2100.0,
+        "accounts_receivable": 940.0,
+        "inventory": 1420.0,
+        "current_assets": 5050.0,
+        "property_plant_equipment": 10450.0,
+        "intangible_assets": 2100.0,
+        "total_assets": 17600.0,
+        "current_liabilities": 3500.0,
+        "short_term_debt": 750.0,
+        "long_term_debt": 2650.0,
+        "total_debt": 3400.0,
+        "total_liabilities": 8500.0,
+        "shareholders_equity": 9100.0
+      }
+    },
+    "cash_flow_statement": {
+      "FY2024": {
+        "operating_cash_flow": 1420.0,
+        "investing_cash_flow": -1100.0,
+        "financing_cash_flow": -180.0,
+        "free_cash_flow": 320.0
+      },
+      "FY2025": {
+        "operating_cash_flow": 1650.0,
+        "investing_cash_flow": -1180.0,
+        "financing_cash_flow": -210.0,
+        "free_cash_flow": 470.0
+      }
+    }
+  },
+  "report_text_extracts": {
+    "management_discussion": "Consolidated annual revenues crossed ₹10,850B reflecting 8.5% YoY growth led by digital services and retail expansion. Net profit after tax expanded 7.0% to ₹845B. Continued capital discipline resulted in reduction of net debt obligations.",
+    "risk_factors": "Global petrochemical margin cyclicality and regulatory tariff policies represent primary operational considerations. Balance sheet leverage remains well-cushioned with debt-to-equity declining to 0.37.",
+    "important_statements": [
+      "Gross consolidated revenue grew 8.5% to ₹10,850B during FY2025.",
+      "Net profit increased by 7.0% to ₹845B.",
+      "Total debt declined by 5.6% to ₹3,400B while shareholders' equity strengthened to ₹9,100B.",
+      "Operating cash flow reached a record ₹1,650B, supporting extensive self-funded capital expenditures.",
+      "Debt-to-equity ratio improved to a conservative 0.37."
+    ]
+  }
+}

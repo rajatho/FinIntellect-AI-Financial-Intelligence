@@ -1,0 +1,143 @@
+{
+  "d6012830": {
+    "id": "d6012830",
+    "name": "Sarah Jenkins, CFA",
+    "email": "analyst@finintellect.com",
+    "password_hash": "scrypt:32768:8:1$4fYTBp5eQtjdGYFs$e8b3caaabca0b3a47afa5f717d9fa21060f1f18573b9f0f923a9c975069feb33be341a3653e048b8d35b13f1e5730f24e27bff8ef605d6152dfa02b77a123386",
+    "company": "Apex Global Asset Management",
+    "role": "Senior Financial Analyst",
+    "avatar_initials": "SJ",
+    "avatar_color": "from-blue-600 to-indigo-600",
+    "created_at": "2026-09-24 14:06:24",
+    "reports": [
+      "techcorp_solutions_ltd._fy2025",
+      "apex_global_holdings_fy2024",
+      "tesla_motors,_inc._fy2025",
+      "nvidia_corporation_fy2025",
+      "apple_inc._fy2025",
+      "tesla,_inc._fy2025",
+      "reliance_industries_ltd._fy2025"
+    ],
+    "preferences": {
+      "default_length": "Standard",
+      "default_tone": "Professional"
+    }
+  },
+  "c3e44101": {
+    "id": "c3e44101",
+    "name": "Michael Vance",
+    "email": "cfo@techcorp.com",
+    "password_hash": "scrypt:32768:8:1$6j5cLmvljrOTQNhl$b4925dc4f3b5440e7055263eb8f26420836321c6020be9740b1c2fc170da844222b42fc9e4980159e5f28055ab714779baf56da2e6a649dd7bfe178b4f4ef8aa",
+    "company": "TechCorp Solutions Ltd.",
+    "role": "Chief Financial Officer",
+    "avatar_initials": "MV",
+    "avatar_color": "from-emerald-600 to-teal-600",
+    "created_at": "2026-09-24 14:06:24",
+    "reports": [
+      "techcorp_solutions_ltd._fy2025",
+      "apex_global_holdings_fy2024"
+    ],
+    "preferences": {
+      "default_length": "Standard",
+      "default_tone": "Professional"
+    }
+  },
+  "22e1f69f": {
+    "id": "22e1f69f",
+    "name": "David Miller, Quant",
+    "email": "david@hedgefund.com",
+    "password_hash": "scrypt:32768:8:1$st2biu6PgXgR8of9$fa89546e723fe1aa51511d7d3aed44ce17a1a83b4400e971b4f5bd019fea83657fd5f2acab7e2f6261252cf9e2f0cffb5abe43b332346bff907395ab886dd78c",
+    "company": "Citadel Alpha",
+    "role": "Quantitative Strategist",
+    "avatar_initials": "DQ",
+    "avatar_color": "from-emerald-600 to-teal-600",
+    "created_at": "2026-09-24 14:08:00",
+    "reports": [
+      "techcorp_solutions_ltd._fy2025"
+    ],
+    "preferences": {
+      "default_length": "Standard",
+      "default_tone": "Professional"
+    }
+  },
+  "9cb986c5": {
+    "id": "9cb986c5",
+    "name": "Alexander Sterling",
+    "email": "alex_1790239111@capital.com",
+    "password_hash": "scrypt:32768:8:1$f7uRib1WVg8iBBGV$f9629df92d2e5644b120d02db6532d69a7b7ff97bff853c85702c345b4dd93e8dcf52cd161f484aca5da0f4c048ff743a71141f615b204684f9861c1b1029470",
+    "company": "Sterling Capital Partners",
+    "role": "Portfolio Manager",
+    "avatar_initials": "AS",
+    "avatar_color": "from-amber-500 to-orange-600",
+    "created_at": "2026-09-24 14:08:31",
+    "reports": [
+      "techcorp_solutions_ltd._fy2025"
+    ],
+    "preferences": {
+      "default_length": "Standard",
+      "default_tone": "Professional"
+    }
+  },
+  "6085b664": {
+    "id": "6085b664",
+    "name": "ram",
+    "email": "rajathn121@gmail.com",
+    "password_hash": "scrypt:32768:8:1$bldatjN1kUdmBNs7$d2e9f11ed787aef12081da7cecf8a233252e70ea7f0e3bf7c93db831228507ae9e28ccc36dcc7709c3b5aba0203fef236e1baf59ba8bcecf1cf636d8f69e7f21",
+    "company": "xxx",
+    "role": "Risk Officer",
+    "avatar_initials": "R",
+    "avatar_color": "from-cyan-600 to-blue-600",
+    "created_at": "2026-09-24 14:36:43",
+    "reports": [
+      "techcorp_solutions_ltd._fy2025",
+      "apple_inc._fy2025",
+      "tata_motors_ltd._fy2025",
+      "apex_global_retail_ltd._fy2025"
+    ],
+    "preferences": {
+      "default_length": "Standard",
+      "default_tone": "Professional"
+    }
+  },
+  "fd46bdbb": {
+    "id": "fd46bdbb",
+    "name": "Alexander Sterling",
+    "email": "alex_1790311797@capital.com",
+    "password_hash": "scrypt:32768:8:1$G82lqhTZ4kAzvDGG$2d9b66a815dd2dcdce06c25236255b633324428f43a154e17e7787ae72f0cd4bfae1fa4038afb8c7e5c4ec7613f63d3b75edd59b9675b91c456673e10bc3d4b6",
+    "company": "Sterling Capital Partners",
+    "role": "Portfolio Manager",
+    "avatar_initials": "AS",
+    "avatar_color": "from-blue-600 to-indigo-600",
+    "created_at": "2026-09-25 10:19:58",
+    "reports": [
+      "techcorp_solutions_ltd._fy2025"
+    ],
+    "preferences": {
+      "default_length": "Standard",
+      "default_tone": "Professional"
+    }
+  },
+  "fc8cbb32": {
+    "id": "fc8cbb32",
+    "name": "ravi",
+    "email": "ravi@gmail.com",
+    "password_hash": "scrypt:32768:8:1$UAfgUJaN7lzTrpHN$4b1322ea5ae5b534325ccea76d5ad442dfc7aa0501d07d17eacd8e5b1980b90ca675cbc7bdc2f389ceaa3f6c94581481403013cb35418d0c441682cfcd6bdfe8",
+    "company": "yyy",
+    "role": "Portfolio Manager",
+    "avatar_initials": "R",
+    "avatar_color": "from-purple-600 to-pink-600",
+    "created_at": "2026-09-25 12:25:45",
+    "reports": [
+      "techcorp_solutions_ltd._fy2025",
+      "apple_inc._fy2025",
+      "apple_inc._fy2024",
+      "distressed_retail_corp_fy2025",
+      "tata_motors_ltd._fy2025",
+      "l&t_fy2025"
+    ],
+    "preferences": {
+      "default_length": "Standard",
+      "default_tone": "Professional"
+    }
+  }
+}

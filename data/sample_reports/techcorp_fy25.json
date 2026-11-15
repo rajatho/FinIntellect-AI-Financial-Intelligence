@@ -1,0 +1,108 @@
+{
+  "company_name": "TechCorp Solutions Ltd.",
+  "reporting_period": "FY2025",
+  "currency": "₹",
+  "unit": "Millions",
+  "industry": "Enterprise Software & Cloud Services",
+  "financial_statements": {
+    "income_statement": {
+      "FY2022": {
+        "revenue": 4800.0,
+        "cogs": 2600.0,
+        "gross_profit": 2200.0,
+        "operating_expenses": 1350.0,
+        "operating_income": 850.0,
+        "interest_expense": 120.0,
+        "tax_expense": 182.5,
+        "net_income": 547.5
+      },
+      "FY2023": {
+        "revenue": 5100.0,
+        "cogs": 2720.0,
+        "gross_profit": 2380.0,
+        "operating_expenses": 1450.0,
+        "operating_income": 930.0,
+        "interest_expense": 130.0,
+        "tax_expense": 200.0,
+        "net_income": 600.0
+      },
+      "FY2024": {
+        "revenue": 5350.0,
+        "cogs": 2850.0,
+        "gross_profit": 2500.0,
+        "operating_expenses": 1500.0,
+        "operating_income": 1000.0,
+        "interest_expense": 140.0,
+        "tax_expense": 215.0,
+        "net_income": 678.5
+      },
+      "FY2025": {
+        "revenue": 5800.0,
+        "cogs": 3150.0,
+        "gross_profit": 2650.0,
+        "operating_expenses": 1690.0,
+        "operating_income": 960.0,
+        "interest_expense": 180.0,
+        "tax_expense": 130.0,
+        "net_income": 650.0
+      }
+    },
+    "balance_sheet": {
+      "FY2024": {
+        "cash_and_equivalents": 980.0,
+        "accounts_receivable": 850.0,
+        "inventory": 640.0,
+        "current_assets": 2750.0,
+        "property_plant_equipment": 4600.0,
+        "intangible_assets": 1650.0,
+        "total_assets": 9000.0,
+        "current_liabilities": 1700.0,
+        "short_term_debt": 400.0,
+        "long_term_debt": 2600.0,
+        "total_debt": 3000.0,
+        "total_liabilities": 4700.0,
+        "shareholders_equity": 4300.0
+      },
+      "FY2025": {
+        "cash_and_equivalents": 1050.0,
+        "accounts_receivable": 920.0,
+        "inventory": 720.0,
+        "current_assets": 2900.0,
+        "property_plant_equipment": 4900.0,
+        "intangible_assets": 1750.0,
+        "total_assets": 9550.0,
+        "current_liabilities": 2000.0,
+        "short_term_debt": 650.0,
+        "long_term_debt": 3550.0,
+        "total_debt": 4200.0,
+        "total_liabilities": 5250.0,
+        "shareholders_equity": 4300.0
+      }
+    },
+    "cash_flow_statement": {
+      "FY2024": {
+        "operating_cash_flow": 820.0,
+        "investing_cash_flow": -650.0,
+        "financing_cash_flow": -120.0,
+        "free_cash_flow": 480.0
+      },
+      "FY2025": {
+        "operating_cash_flow": 910.0,
+        "investing_cash_flow": -720.0,
+        "financing_cash_flow": -100.0,
+        "free_cash_flow": 520.0
+      }
+    }
+  },
+  "report_text_extracts": {
+    "management_discussion": "During FY2025, consolidated revenue expanded by 8.4% to ₹5.8B driven by broad adoption of cloud enterprise platforms. However, net profit after tax experienced a contraction of 4.2% to ₹650M due to higher personnel restructuring costs and increased debt service costs. Total long-term borrowings were scaled up to support capital expenditures in hyperscale infrastructure.",
+    "risk_factors": "The company increased total leverage during the period, resulting in a higher debt-to-equity ratio of 1.42. Working capital requirements expanded, moderating the current ratio to 1.45. Foreign exchange volatility and software license churn remain monitoring items.",
+    "important_statements": [
+      "Consolidated top-line revenue expanded to ₹5.8B in FY2025 from ₹5.35B in FY2024, representing an 8.4% year-over-year increase.",
+      "Net profit declined 4.2% to ₹650M compared to ₹678.5M in the prior financial year.",
+      "Gross debt expanded to ₹4,200M, taking the debt-to-equity ratio to 1.42 against 1.15 in FY2024.",
+      "Cash flow from operations remained resilient at ₹910M, demonstrating sustained operating cash generation.",
+      "Management allocated ₹720M toward infrastructure capital expenditures during FY2025."
+    ]
+  }
+}
